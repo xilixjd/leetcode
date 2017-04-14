@@ -51,6 +51,25 @@ class Solution(object):
         else:
             return 0
 
+    def findPairs2(self, nums, k):
+        """
+        no set and k > 0
+        :param nums:
+        :param k:
+        :return:
+        """
+        nums_count_dict = {}
+        for n in nums:
+            if nums_count_dict.get(n):
+                nums_count_dict[n] += 1
+            else:
+                nums_count_dict[n] = 1
+        count = 0
+        for key in nums_count_dict:
+            if nums_count_dict.get(key + k):
+                count += 1
+        return count
+
 
     def findPairsFast(self, nums, k):
         if k > 0:
@@ -62,4 +81,5 @@ class Solution(object):
 
 solu = Solution()
 print solu.findPairs([1,2,2,1,1], 0)
+print solu.findPairs2([1,2,3,1,4,2], 2)
 print solu.findPairsFast([3,1,4,1,5], 2)
