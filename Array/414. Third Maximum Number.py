@@ -61,5 +61,28 @@ class Solution(object):
         else:
             return array[0]
 
+    def thirdMaxFast(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        max1 = None
+        max2 = None
+        max3 = None
+        for n in nums:
+            if n == max1 or n == max2 or n == max3:
+                continue
+            elif max1 is None or n > max1:
+                max3 = max2
+                max2 = max1
+                max1 = n
+            elif max2 is None or n > max2:
+                max3 = max2
+                max2 = n
+            elif max3 is None or n > max3:
+                max3 = n
+        return max3 if max3 is not None else max1
+
+
 solu = Solution()
 print solu.thirdMax([1,-2147483648,2])
