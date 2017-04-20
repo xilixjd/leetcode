@@ -25,7 +25,7 @@ class Solution(object):
         :type board: List[List[int]]
         :rtype: void Do not return anything, modify board in-place instead.
         """
-    m =
+        m, n = len(board), len(board[0])
 
 
 
