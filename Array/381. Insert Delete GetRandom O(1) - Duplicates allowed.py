@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Design a data structure that supports all following operations in average O(1) time.
 
@@ -90,15 +91,12 @@ class RandomizedCollectionReWrite(object):
         if self.arrDict.get(val) is None or self.arrDict.get(val) == set([]):
             return False
         else:
-            # set_array = list(self.arrDict[val])
-            # remove_pos = set_array.pop()
-            # self.arrDict[val] = set(set_array)
             remove_pos = self.arrDict[val].pop()
-            self.array[remove_pos] = self.array[len(self.array) - 1]
-            print self.arrDict
+            self.array[remove_pos] = self.array[-1]
             if len(self.arrDict[self.array[remove_pos]]) != 0:
-                self.arrDict[self.array[remove_pos]].pop()
+                # 先 add 再 pop()
                 self.arrDict[self.array[remove_pos]].add(remove_pos)
+                self.arrDict[self.array[remove_pos]].discard(len(self.array) - 1)
             self.array.pop()
             return True
 
