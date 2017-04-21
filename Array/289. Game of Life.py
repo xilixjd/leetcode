@@ -25,16 +25,31 @@ class Solution(object):
         :type board: List[List[int]]
         :rtype: void Do not return anything, modify board in-place instead.
         """
+        if board == None or len(board) == 0:
+            return
         m, n = len(board), len(board[0])
-
+        for i in range(m):
+            for j in range(n):
+                lives = self.liveNeighbors(board, i, j, m, n)
+                if board[i][j] == 1 and lives >= 2 and lives <= 3:
+                    board[i][j] = 3
+                if board[i][j] == 0 and lives == 3:
+                    board[i][j] = 2
+        for i in range(m):
+            for j in range(n):
+                board[i][j] >>= 1
+        print board
 
 
     def liveNeighbors(self, board, i, j, m, n):
         lives = 0
         # 左边最小为 0，右边最大为 i + 1
-        for x in range(max(i - 1, 0), min(i + 1, m - 1)):
+        for x in range(max(i - 1, 0), min(i + 1, m - 1)+1):
             # 上面最小为 0，下面最大为 j + 1
-            for y in range(max(j - 1, 0), min(j + 1, n - 1)):
+            for y in range(max(j - 1, 0), min(j + 1, n - 1)+1):
                 lives += board[x][y] & 1
         lives -= board[i][j] & 1
         return lives
+
+solu = Solution()
+solu.gameOfLife([[1,1],[1,0]])
