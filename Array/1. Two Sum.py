@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Solution(object):
     def twoSum(self, nums, target):
         """
