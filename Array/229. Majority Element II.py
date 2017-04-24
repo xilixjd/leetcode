@@ -44,4 +44,4 @@ class Solution(object):
                 if nums.count(n) > len(nums) // 3]
 
 solu = Solution()
-print solu.majorityElement([1,1,3,1])
+print solu.majorityElementMy([1,1,3,1])
