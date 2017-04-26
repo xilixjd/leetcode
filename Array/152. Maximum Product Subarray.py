@@ -15,24 +15,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # max_product = nums[0]
-        # temp = 1
-        # for n in nums:
-        #     if temp * n >= max_product:
-        #         max_product = temp * n
-        #         temp = temp * n
-        #         if nums[0] == 0:
-        #             temp = 1
-        #     elif n >= max_product:
-        #         max_product = n
-        #         temp = n
-        #     else:
-        #         if n <= 0:
-        #             temp = 1
-        #         else:
-        #             temp = n
-        # return max_product
+        if len(nums) == 0:
+            return
+        imax = nums[0]
+        imin = nums[0]
+        r = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] < 0:
+                imax, imin = imin, imax
+            imax = max(nums[i], imax * nums[i])
+            imin = min(nums[i], imin * nums[i])
+            r = max(r, imax)
+        return r
 
 
 solu = Solution()
-print solu.maxProduct([-2,3,-4])
+print solu.maxProduct([3, 4, -0.1, 7, 8])
