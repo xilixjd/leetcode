@@ -41,11 +41,50 @@ class Solution(object):
         return max_profit
 
     def maxProfitMy2(self, prices):
+        '''
+        效率较低 9%
+        :param prices:
+        :return:
+        '''
         max_profit = 0
-        max_num_dict = {}
-        min_num_dict = {}
+        if len(prices) == 0 or len(prices) == 1:
+            return 0
+        max_num_dict = {0: prices[0]}
+        min_num_dict = {1: prices[1]}
         for i in range(len(prices)):
+            max_pos = max_num_dict.keys()[0]
+            min_pos = min_num_dict.keys()[0]
+            if prices[i] < min_num_dict[min_pos]:
+                min_num_dict = {i: prices[i]}
+                min_pos = min_num_dict.keys()[0]
+            if prices[i] >= max_num_dict[max_pos] or max_pos <= min_pos:
+                max_num_dict = {i: prices[i]}
+                max_pos = max_num_dict.keys()[0]
+            print max_num_dict
+            print min_num_dict
+            if max_pos > min_pos:
+                max_profit = max(max_profit, max_num_dict[max_pos] - min_num_dict[min_pos])
+        return max_profit
 
+    def maxProfitMyFast(self, prices):
+        '''
+        Kadane's Algorithm
+        :param prices:
+        :return:
+        '''
+        maxCur = maxSoFar = 0
+        for i in range(1, len(prices)):
+            maxCur = max(0, maxCur + prices[i] - prices[i - 1])
+            maxSoFar = max(maxSoFar, maxCur)
+        return maxSoFar
+
+    def maxProfitMyFaster(self, prices):
+        minPrice = 10000000
+        maxPro = 0
+        for i in range(len(prices)):
+            minPrice = min(minPrice, prices[i])
+            maxPro = max(maxPro, prices[i] - minPrice)
+        return maxPro
 
 solu = Solution()
-print solu.maxProfitMy([7,6,4,3,1])
+print solu.maxProfitMyFaster([7,5,4,10,3,2,1,10])
