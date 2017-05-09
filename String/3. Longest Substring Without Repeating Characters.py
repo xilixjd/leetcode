@@ -71,7 +71,21 @@ class Solution(object):
                 max_len = max(len(temp_array), max_len)
         return max_len
 
+    def lengthOfLongestSubstring(self, s):
+        if len(s) == 0:
+            return 0
+        tem_dict = {}
+        max_len = 0
+        j = 0
+        for i in range(len(s)):
+            if tem_dict.get(s[i]) is not None:
+                j = max(j, tem_dict.get(s[i]) + 1)
+            tem_dict[s[i]] = i
+            max_len = max(max_len, i - j + 1)
+        return max_len
+
+
 
 
 solu = Solution()
-print solu.lengthOfLongestSubstringMy2("ggububgvfk")
+print solu.lengthOfLongestSubstring("ggububgvfk")
