@@ -21,3 +21,18 @@ class Solution(object):
         :type path: str
         :rtype: str
         """
+        stack = []
+        skip = ['..', '.', '']
+        print path.split('/')
+        for dir in path.split('/'):
+            if dir == '..' and len(stack) != 0:
+                stack.pop()
+            elif not dir in skip:
+                stack.append(dir)
+        res = ""
+        for dir in stack:
+            res += '/' + dir
+        return '/' if len(res) == 0 else res
+
+solu = Solution()
+print solu.simplifyPath('/./home/dir')
