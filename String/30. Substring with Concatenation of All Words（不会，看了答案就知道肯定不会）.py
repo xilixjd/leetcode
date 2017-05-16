@@ -42,6 +42,7 @@ class Solution(object):
         :param words:
         :param array:
         :return:
+        排列组合
         '''
         if len(words) > 1:
             elmentCur = words.pop(0)
