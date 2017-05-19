@@ -29,7 +29,9 @@ class Solution(object):
         if prel > prer or inl > inr:
             return None
         root = TreeNode(preorder[prel])
+        # 中序遍历根在前序遍历的位置
         preIndex = inorderMap[preorder[prel]]
+        # preIndex - inl 左边长度
         root.left = self.buildTreePreorder(prel + 1, prel + preIndex - inl, preorder, inl, preIndex - 1, inorder, inorderMap)
         root.right = self.buildTreePreorder(prel + preIndex - inl + 1, prer, preorder, preIndex + 1, inr, inorder, inorderMap)
         return root
