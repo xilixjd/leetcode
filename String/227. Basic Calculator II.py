@@ -12,7 +12,7 @@ Some examples:
 " 3+5 / 2 " = 5
 Note: Do not use the eval built-in library function.
 '''
-
+import math
 
 class Solution(object):
     def calculate(self, s):
@@ -20,20 +20,43 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        if len(s) == 0:
-            return
-        array = []
-        value_str = ""
+        stack = []
+        num = 0
+        sign = '+'
         for i in range(len(s)):
             if s[i].isdigit():
-                value_str += s[i]
-            else:
-                array.append(int(value_str))
-                value_str = ""
-                if s[i].isspace():
-                    continue
-                if s[i] == '+':
-                    array.append('+')
-                    continue
-                if s[i] == '*' or s[i] == '/'
+                num = num * 10 + int(s[i])
+            if not s[i].isdigit() and not s[i].isspace() or i == len(s) - 1:
+                if sign == '+':
+                    pass
+                elif sign == '-':
+                    num = -num
+                elif sign == '*':
+                    num = num * stack[-1]
+                    stack.pop()
+                elif sign == '/':
+                    num = self.get_division(stack[-1], num)
+                    stack.pop()
+                stack.append(num)
+                num = 0
+                sign = s[i]
+        value = 0
+        while len(stack) > 0:
+            value += stack.pop()
+        return value
 
+    def get_division(self, num1, num2):
+        if num2 == 0:
+            return False
+        if num1 > 0 and num2 > 0:
+            return num1 / num2
+        else:
+            if num2 < 0:
+                num2 = -num2
+            if num1 < 0:
+                num1 = -num1
+            return -(num1 / num2)
+
+
+solu = Solution()
+print solu.calculate('14-3/2')
