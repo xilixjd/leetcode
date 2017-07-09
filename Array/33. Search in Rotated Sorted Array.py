@@ -15,36 +15,23 @@ class Solution(object):
         """
         没理解题意就是 find 的话也太简单了
         应该是还要求 logn 的时间复杂度
+        此题在 《剑指 offer》p69 有启发
         :type nums: List[int]
         :type target: int
         :rtype: int
         """
-        array = []
-        i = 1
-        while i < len(nums):
-            if nums[i] < nums[i-1]:
-                array += nums[i:]
-                break
-            i += 1
-        if i == len(nums):
-            array = nums
+        i = 0
+        j = len(nums) - 1
+        if target < nums[i]:
+            for index in range(j + 1)[::-1]:
+                if nums[index] == target:
+                    return index
+        elif target > nums[i]:
+            for index in range(j + 1):
+                if nums[index] == target:
+                    return index
         else:
-            array += nums[:i]
-        start = 0
-        end = len(array) - 1
-        print array
-        while start + 1 < end:
-            mid = int((start + end) / 2)
-            if array[mid] == target:
-                start = mid
-            elif array[mid] < target:
-                start = mid
-            else:
-                end = mid
-        if array[start] == target:
-            return start
-        if array[end] == target:
-            return end
+            return i
         return -1
 
     def binarySearch(self, i, j, nums, target):
