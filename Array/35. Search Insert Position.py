@@ -21,3 +21,15 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        if target < nums[0]:
+            return 0
+        for i in range(len(nums)):
+            if target == nums[i]:
+                return i
+            elif i != len(nums) - 1 and nums[i+1] > target > nums[i]:
+                return i + 1
+        return len(nums)
+
+
+solu = Solution()
+print solu.searchInsert([1,3,5,6], 0)
