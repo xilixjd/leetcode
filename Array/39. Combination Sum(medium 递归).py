@@ -25,3 +25,24 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
+        candidates.sort()
+        res = []
+        temList = []
+        return self.backTrack(res, candidates, temList, target, 0)
+        # return res
+
+    def backTrack(self, res, numList, temList, remain, start):
+        if remain < 0:
+            return
+        elif remain == 0:
+            res.append(temList)
+            print temList
+        else:
+            for i in range(start, len(numList)):
+                temList.append(numList[i])
+                self.backTrack(res, numList, temList, remain - numList[i], i)
+                temList.pop()
+        return res
+
+solu = Solution()
+print solu.combinationSum([2, 3, 6, 7], 7)
