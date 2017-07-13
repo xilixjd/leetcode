@@ -17,7 +17,7 @@ A solution set is:
 ]
 '''
 
-
+import copy
 class Solution(object):
     def combinationSum(self, candidates, target):
         """
@@ -28,21 +28,22 @@ class Solution(object):
         candidates.sort()
         res = []
         temList = []
-        return self.backTrack(res, candidates, temList, target, 0)
-        # return res
+        self.backTrack(res, candidates, temList, target, 0)
+        return res
 
     def backTrack(self, res, numList, temList, remain, start):
         if remain < 0:
             return
         elif remain == 0:
-            res.append(temList)
-            print temList
+            res.append(copy.copy(temList))
         else:
             for i in range(start, len(numList)):
                 temList.append(numList[i])
                 self.backTrack(res, numList, temList, remain - numList[i], i)
                 temList.pop()
-        return res
+
+    def test(self, nums):
+        nums.append(3)
 
 solu = Solution()
 print solu.combinationSum([2, 3, 6, 7], 7)
