@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
-
 '''
-Given a set of candidate numbers (C) (without duplicates) and a target number (T),
+Given a collection of candidate numbers (C) and a target number (T),
 find all unique combinations in C where the candidate numbers sums to T.
 
-The same repeated number may be chosen from C unlimited number of times.
+Each number in C may only be used once in the combination.
 
 Note:
 All numbers (including target) will be positive integers.
 The solution set must not contain duplicate combinations.
-For example, given candidate set [2, 3, 6, 7] and target 7,
+For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8,
 A solution set is:
 [
-  [7],
-  [2, 2, 3]
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
 ]
 '''
 
 import copy
 class Solution(object):
-    def combinationSum(self, candidates, target):
+    def combinationSum2(self, candidates, target):
         """
         :type candidates: List[int]
         :type target: int
@@ -29,6 +30,7 @@ class Solution(object):
         res = []
         temList = []
         self.backTrack(res, candidates, temList, target, 0)
+        print res
         return res
 
     def backTrack(self, res, numList, temList, remain, start):
@@ -38,10 +40,12 @@ class Solution(object):
             res.append(copy.copy(temList))
         else:
             for i in range(start, len(numList)):
+                if start != i and numList[i] == numList[i-1]:
+                    continue
                 temList.append(numList[i])
-                self.backTrack(res, numList, temList, remain - numList[i], i)
+                self.backTrack(res, numList, temList, remain - numList[i], i + 1)
                 temList.pop()
 
 
 solu = Solution()
-print solu.combinationSum([2, 3, 6, 7], 7)
+print solu.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
