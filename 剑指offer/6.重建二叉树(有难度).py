@@ -15,3 +15,16 @@ class Solution:
     # 返回构造的TreeNode根节点
     def reConstructBinaryTree(self, pre, tin):
         # write code here
+        inorderMap = {}
+        for i in range(len(tin)):
+            inorderMap[tin[i]] = i
+        return self.constrct(0, len(pre) - 1, pre, 0, len(tin) - 1, tin, inorderMap)
+
+    def constrct(self, prel, prer, pre, inl, inr, tin, inorderMap):
+        if prel > prer or inl > inr:
+            return None
+        root = TreeNode(pre[prel])
+        preIndex = inorderMap[pre[prel]]
+        root.left = self.constrct(prel + 1, prel + preIndex - inl, pre, inl, preIndex - 1, tin, inorderMap)
+        root.right = self.constrct(prel + preIndex - inl + 1, prer, pre, preIndex + 1, inr, tin, inorderMap)
+        return root
