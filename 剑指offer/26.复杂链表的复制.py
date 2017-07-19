@@ -12,11 +12,32 @@ class Solution:
     # 返回 RandomListNode
     def Clone(self, pHead):
         # write code here
-        if pHead is None:
+        pNode = pHead
+        if pNode is None:
             return None
         pDict = {}
-        pCopy = RandomListNode(pHead.label)
-        if pHead.random:
-            pDict[pHead.val] = pHead.random
-        while pHead.next is not None:
-            pCopy.next =
+        pCopyHead = RandomListNode(pNode.label)
+        pCopy = pCopyHead
+        pDict[pNode.label] = pCopy
+        while pNode.next is not None:
+            pCopy.next = RandomListNode(pNode.next.label)
+            pCopy = pCopy.next
+            pNode = pNode.next
+            pDict[pNode.label] = pCopy
+        pNode = pHead
+        pCopy = pCopyHead
+        while pNode is not None:
+            if pNode.random:
+                pCopy.random = pDict[pNode.random.label]
+            pNode = pNode.next
+            pCopy = pCopy.next
+        return pCopyHead
+
+solu = Solution()
+a = RandomListNode(1)
+b = RandomListNode(2)
+c = RandomListNode(3)
+a.next = b
+b.next = c
+a.random = c
+print solu.Clone(a).random.label
