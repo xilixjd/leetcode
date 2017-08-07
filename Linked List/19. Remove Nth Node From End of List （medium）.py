@@ -13,10 +13,10 @@ Try to do this in one pass.
 '''
 
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution(object):
     def removeNthFromEnd(self, head, n):
@@ -25,3 +25,23 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
+        first = head
+        last = head
+        for i in range(n):
+            first = first.next
+        if not first:
+            return head.next
+        while first.next:
+            first = first.next
+            last = last.next
+        last.next = last.next.next
+        return head
+
+root = ListNode(1)
+# root.next = ListNode(2)
+# root.next.next = ListNode(3)
+# root.next.next.next = ListNode(4)
+# root.next.next.next.next = ListNode(5)
+
+solu = Solution()
+print solu.removeNthFromEnd(root, 1)
