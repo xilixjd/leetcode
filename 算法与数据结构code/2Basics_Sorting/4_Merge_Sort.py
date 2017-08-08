@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 # 归并排序
 # 分治思想 时间复杂度o(lgN*N)
 
@@ -9,9 +10,9 @@ class Sort:
 
         mid = int(n / 2)
         left = self.mergeSort(alist[:mid])
-        print('left = ' + str(left))
+        # print('left = ' + str(left))
         right = self.mergeSort(alist[mid:])
-        print('right = ' + str(right))
+        # print('right = ' + str(right))
 
         return self.mergeSortedArray(left, right)
 

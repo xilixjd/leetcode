@@ -10,6 +10,7 @@ class Solution:
             return []
         index = self.partition(tinput, 0, len(tinput) - 1)
         while index != k - 1:
+            print index
             if index > k - 1:
                 index = self.partition(tinput, 0, index - 1)
             else:

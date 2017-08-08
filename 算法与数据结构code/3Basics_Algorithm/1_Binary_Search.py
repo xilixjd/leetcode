@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 # 二分查找
 
 class Solution:
@@ -25,6 +26,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    a = [1, 3, 4, 6, 7, 34]
+    a = [1, 3, 4, 5, 6, 7, 34]
     s = Solution()
     print(s.BinarySearch(a, 5))

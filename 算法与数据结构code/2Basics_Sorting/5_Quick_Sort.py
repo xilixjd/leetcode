@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 # 快速排序
 # “核心：快排是一种采用分治思想的排序算法，大致分为三个步骤。
 #
@@ -41,6 +42,7 @@ class Sort():
         self.quickSort2(alist, i + 1, r)
 
     #随机化版本
+    # 报错了，不好
     def quickSort3(self, alist, p, r):
         print(alist)
         if p >= r:
