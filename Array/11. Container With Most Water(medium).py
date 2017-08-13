@@ -52,6 +52,20 @@ class Solution(object):
                 j -= 1
         return max_cou
 
+    def maxAreaMy2(self, height):
+        maxArea = -1000
+        i = 0
+        j = len(height) - 1
+        while i < j:
+            h = min(height[i], height[j])
+            area = h * (j - i)
+            maxArea = max(area, maxArea)
+            while i < j and height[i] <= h:
+                i += 1
+            while i < j and height[j] <= h:
+                j -= 1
+        return maxArea
+
 
 solu = Solution()
-print solu.maxAreaFast2([2,1])
+print solu.maxAreaMy2([3,2,1,3])

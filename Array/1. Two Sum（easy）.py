@@ -37,7 +37,18 @@ class Solution(object):
             else:
                 continue
         return None
-                
+
+    def twoSumMy(self, nums, target):
+        nums_dict = {}
+        for i in range(len(nums)):
+            nums_dict[nums[i]] = i
+        for i in range(len(nums)):
+            diff = target - nums[i]
+            if nums_dict.get(diff) != None and nums_dict.get(diff) != i:
+                return [i, nums_dict.get(diff)]
+        return None
+
+
 solu = Solution()
 print solu.twoSum([2, 3, 8, 4, 5], 12)
-print solu.twoSumFaster([2, 3, 8, 4, 5], 12)
+print solu.twoSumMy([2, 3, 8, 4, 5], 12)
