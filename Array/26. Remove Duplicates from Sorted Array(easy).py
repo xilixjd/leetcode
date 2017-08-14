@@ -25,3 +25,14 @@ class Solution(object):
             else:
                 del nums[i]
         return len(nums)
+
+    def removeDuplicatesMy(self, nums):
+        if len(nums) == 1 or len(nums) == 0:
+            return len(nums)
+        for i in range(1, len(nums))[::-1]:
+            if nums[i] == nums[i-1]:
+                nums.pop(i)
+        return len(nums)
+
+solu = Solution()
+print solu.removeDuplicatesMy([1,1,2,2])

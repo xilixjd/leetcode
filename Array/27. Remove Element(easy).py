@@ -26,3 +26,9 @@ class Solution(object):
             else:
                 i += 1
         return len(nums)
+
+    def removeElementMy(self, nums, val):
+        for i in range(0, len(nums))[::-1]:
+            if nums[i] == val:
+                nums.pop(i)
+        return len(nums)

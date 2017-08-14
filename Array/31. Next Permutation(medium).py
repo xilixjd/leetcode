@@ -12,7 +12,7 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1,1,5 → 1,5,1
 '''
 
-
+import random
 class Solution(object):
     def nextPermutation(self, nums):
         """
@@ -63,6 +63,70 @@ class Solution(object):
                 min_num['value'] = nums[i]
         return min_num['index']
 
+    def nextPermutationMy(self, nums):
+        j = len(nums) - 1
+        while j > 0:
+            if nums[j] > nums[j-1]:
+                break
+            j -= 1
+        if j == 0:
+            nums.reverse()
+        elif j == len(nums) - 1:
+            nums[j], nums[j-1] = nums[j-1], nums[j]
+        else:
+            least_index = self.findLeastNumBeyondJ(nums, j)
+            nums[j-1], nums[least_index] = nums[least_index], nums[j-1]
+            self.quickSort(nums, j, len(nums) - 1)
+        print nums
+
+
+    def findLeastNumBeyondJ(self, nums, j):
+        '''
+        :param nums:
+        :param j:
+        :return:
+        '''
+        min_dict = {
+            'min_diff': 1000000000,
+            'index': 0
+        }
+        for i in range(j, len(nums)):
+            diff = nums[i] - nums[j-1]
+            if diff > 0:
+                if diff < min_dict['min_diff']:
+                    min_dict['min_diff'] = diff
+                    min_dict['index'] = i
+        return min_dict['index']
+
+    def partition(self, nums, start, end):
+        index = random.randint(start, end)
+        nums[index], nums[end] = nums[end], nums[index]
+        small = start - 1
+        for i in range(start, end):
+            if nums[i] < nums[end]:
+                small += 1
+                if small != i:
+                    nums[small], nums[i] = nums[i], nums[small]
+        small += 1
+        nums[small], nums[end] = nums[end], nums[small]
+        return small
+
+    def quickSort(self, nums, start, end):
+        if start > end:
+            return
+        index = self.partition(nums, start, end)
+        self.quickSort(nums, start, index - 1)
+        self.quickSort(nums, index + 1, end)
+
+    # def reverse_nums(self, nums, l, r):
+    #     while l < r:
+    #         print l, r
+    #         nums[l], nums[r] = nums[r], nums[l]
+    #         l += 1
+    #         r -= 1
+
+
 solu = Solution()
-solu.nextPermutation([5,4,7,5,3,2])
+solu.nextPermutationMy([5,4,7,5,3,2])
+solu.nextPermutationMy([1,3,2])
 #[5,5,2,3,4,7]
