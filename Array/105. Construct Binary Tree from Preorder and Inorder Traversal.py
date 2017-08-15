@@ -36,6 +36,15 @@ class Solution(object):
         root.right = self.buildTreePreorder(prel + preIndex - inl + 1, prer, preorder, preIndex + 1, inr, inorder, inorderMap)
         return root
 
+    def buildTreePreorderMy(self, prel, prer, preorder, inl, inr, inorder, inorderMap):
+        if prel > prer or inl > inr:
+            return
+        root = TreeNode(preorder[prel])
+        preIndex = inorderMap[preorder[prel]]
+        root.left = self.buildTreePreorderMy(prel + 1, preIndex - inl + prel, preorder, inl, preIndex - 1, inorder, inorderMap)
+        root.right = self.buildTreePreorderMy(preIndex - inl + prel + 1, prer, preorder, preIndex + 1, inr, inorder, inorderMap)
+        return root
+
 
 def inorderfunc(node):
     if node is not None:

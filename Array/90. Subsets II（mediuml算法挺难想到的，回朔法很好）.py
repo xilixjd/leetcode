@@ -19,7 +19,7 @@ If nums = [1,2,2], a solution is:
 ]
 '''
 
-
+import copy
 class Solution(object):
     def subsetsWithDup(self, S):
         res = [[]]
@@ -32,5 +32,23 @@ class Solution(object):
                 res.append(res[j] + [S[i]])
         return res
 
+    def subsetsWithDupMy(self, S):
+        result = []
+        l = []
+        S.sort()
+        self.backTrack(result, l, S, 0)
+        return result
+
+    def backTrack(self, result, l, S, start):
+        result.append(copy.copy(l))
+        for i in range(start, len(S)):
+            if i != start and S[i] == S[i-1]:
+                continue
+            l.append(S[i])
+            print 'before', l
+            self.backTrack(result, l, S, i+1)
+            print 'after', l
+            l.pop()
+
 solu = Solution()
-print solu.subsetsWithDup([1, 2, 2, 1])
+print solu.subsetsWithDupMy([1, 2, 2, 1])

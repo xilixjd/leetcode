@@ -29,7 +29,7 @@ class Solution(object):
         candidates.sort()
         res = []
         temList = []
-        self.backTrack(res, candidates, temList, target, 0)
+        self.backTrackMy(res, candidates, temList, target, 0)
         print res
         return res
 
@@ -44,6 +44,21 @@ class Solution(object):
                     continue
                 temList.append(numList[i])
                 self.backTrack(res, numList, temList, remain - numList[i], i + 1)
+                temList.pop()
+
+    def backTrackMy(self, res, numList, temList, remain, start):
+        if remain < 0:
+            return
+        elif remain == 0:
+            res.append(copy.copy(temList))
+        else:
+            for i in range(start, len(numList)):
+                # 如 [1, 2, 5] 1 可以为 第一个或第二个，加这一行可避免这种情况
+                if i != start and numList[i] == numList[i-1]:
+                    continue
+                temList.append(numList[i])
+                print i, temList
+                self.backTrackMy(res, numList, temList, remain - numList[i], i + 1)
                 temList.pop()
 
 

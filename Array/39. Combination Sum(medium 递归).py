@@ -42,6 +42,24 @@ class Solution(object):
                 self.backTrack(res, numList, temList, remain - numList[i], i)
                 temList.pop()
 
+    def combinationSumMy(self, candidates, target):
+        candidates.sort()
+        res = []
+        temList = []
+        self.backTrackMy(res, candidates, temList, target, 0)
+        return res
+
+    def backTrackMy(self, res, numList, temList, remain, start):
+        if remain < 0:
+            return
+        elif remain == 0:
+            res.append(copy.copy(temList))
+        else:
+            for i in range(start, len(numList)):
+                temList.append(numList[i])
+                self.backTrackMy(res, numList, temList, remain - numList[i], i)
+                temList.pop()
+
 
 solu = Solution()
 print solu.combinationSum([2, 3, 6, 7], 7)
