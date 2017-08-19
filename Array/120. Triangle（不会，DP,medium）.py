@@ -31,6 +31,7 @@ class Solution(object):
                 sums[j] = min(sums[j], sums[j+1]) + triangle[i][j]
         return sums[0]
 
+
     def minimumTotal1(self, triangle):
         '''
         非 DP 方法
@@ -78,4 +79,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.minimumTotal([[-1],[2,3],[1,-1,-3]])
+print solu.minimumTotalMy([[-1],[2,3],[1,-1,-3]])

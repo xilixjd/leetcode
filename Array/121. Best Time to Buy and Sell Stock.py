@@ -75,6 +75,7 @@ class Solution(object):
         maxCur = maxSoFar = 0
         for i in range(1, len(prices)):
             maxCur = max(0, maxCur + prices[i] - prices[i - 1])
+            print maxCur
             maxSoFar = max(maxSoFar, maxCur)
         return maxSoFar
 
@@ -87,4 +88,4 @@ class Solution(object):
         return maxPro
 
 solu = Solution()
-print solu.maxProfitMyFaster([7,5,4,10,3,2,1,10])
+print solu.maxProfitMyFast([7, 1, 5, 3, 6, 4])
