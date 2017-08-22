@@ -28,6 +28,19 @@ class Solution(object):
             r = max(r, imax)
         return r
 
+    def maxProductMy(self, nums):
+        if len(nums) == 0:
+            return
+        r = iMax = iMin = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] < 0:
+                iMax, iMin = iMin, iMax
+            iMax = max(nums[i], nums[i] * iMax)
+            iMin = min(nums[i], nums[i] * iMin)
+            r = max(r, iMax)
+        return r
+
+
 
 solu = Solution()
 print solu.maxProduct([3, 4, -0.1, 7, 8])

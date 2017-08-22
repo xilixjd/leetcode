@@ -36,5 +36,19 @@ class Solution(object):
                 end = mid
         return nums[start]
 
+    def findMinMy(self, nums):
+        p1 = 0
+        p2 = len(nums) - 1
+        while p1 < p2:
+            if nums[p1] < nums[p2]:
+                return nums[p1]
+            mid = (p1 + p2) / 2
+            if nums[mid] >= nums[p1]:
+                p1 = mid + 1
+            else:
+                p2 = mid
+        return nums[p1]
+
+
 solu = Solution()
-print solu.findMinFast([4,5,6,7,1,2,3])
+print solu.findMinMy([1,2])

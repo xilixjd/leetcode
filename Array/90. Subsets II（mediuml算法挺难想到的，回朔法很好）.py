@@ -28,7 +28,6 @@ class Solution(object):
             if i == 0 or S[i] != S[i - 1]:
                 l = len(res)
             for j in range(len(res) - l, len(res)):
-                print j, res[j], [S[i]], res[j] + [S[i]]
                 res.append(res[j] + [S[i]])
         return res
 
