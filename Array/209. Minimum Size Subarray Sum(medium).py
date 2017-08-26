@@ -51,6 +51,21 @@ class Solution(object):
                 i += 1
         return 0 if min_num == 100000 else min_num
 
+    def minSubArrayLenMy1(self, s, nums):
+        if len(nums) == 0:
+            return 0
+        min_num = 10000
+        i = j = 0
+        sums = 0
+        while j < len(nums):
+            sums += nums[j]
+            j += 1
+            while sums >= s:
+                min_num = min(min_num, j - i)
+                sums -= nums[i]
+                i += 1
+        return 0 if min_num == 10000 else min_num
+
 
 solu = Solution()
 print solu.minSubArrayLenFast(7, [2,3,1,2,4,3])
