@@ -89,11 +89,11 @@ class Solution():
         return -1
 
 array = [3, 2, 1, 5, 4, 9, 7]
-array.sort()
+# array.sort()
 solu = Solution()
-# print solu.quickSort(array, 0, len(array) - 1)
+print solu.quickSort(array, 0, len(array) - 1)
 print array
-print solu.binary_search(array, 1)
+# print solu.binary_search(array, 1)
 
 # print solu.mergeSort(array)
 
