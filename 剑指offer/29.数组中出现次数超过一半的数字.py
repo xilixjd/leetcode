@@ -7,6 +7,7 @@ import random
 class Solution:
     def MoreThanHalfNum_Solution(self, numbers):
         # write code here
+        # 实际上是选出第一半大的数。。
         middle = len(numbers) / 2
         start = 0
         end = len(numbers) - 1
