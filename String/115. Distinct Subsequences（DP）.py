@@ -36,4 +36,4 @@ class Solution(object):
         return dp[len(t)][len(s)]
 
 solu = Solution()
-print solu.numDistinct('rabbbit', 'rabbit')
+print solu.numDistinct('ABCDE', 'ACE')

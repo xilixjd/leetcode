@@ -78,21 +78,25 @@ class Solution():
     def binary_search(self, nums, target):
         left = 0
         right = len(nums) - 1
+        count = 0
         while left <= right:
             mid = (left + right) / 2
+            count += 1
             if nums[mid] > target:
                 right = mid - 1
             elif nums[mid] < target:
                 left = mid + 1
             else:
                 return mid
+        print count
         return -1
 
-array = [3, 2, 1, 5, 4, 9, 7]
+array = [3, 6, 8, 10 ,12,15,16,18,21,25,30]
 # array.sort()
 solu = Solution()
-print solu.quickSort(array, 0, len(array) - 1)
-print array
+solu.binary_search(array, 11)
+# print solu.quickSort(array, 0, len(array) - 1)
+# print array
 # print solu.binary_search(array, 1)
 
 # print solu.mergeSort(array)
