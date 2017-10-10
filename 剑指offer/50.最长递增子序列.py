@@ -28,6 +28,7 @@ def generateArray(array, dp):
     return lis
 
 
-array = [1,2,5,6,3,4]
+# array = [1,2,5,6,3,7]
+array = list("test")
 dp = getDp1(array)
 print generateArray(array, dp)
