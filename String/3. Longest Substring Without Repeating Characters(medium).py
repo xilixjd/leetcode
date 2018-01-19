@@ -13,6 +13,59 @@ Note that the answer must be a substring, "pwke" is a subsequence and not a subs
 '''
 
 
+class ReSolution(object):
+    def lengthOfLongestSubstringMy(self, s):
+        '''
+        二刷
+        最后一个例子通过不了，思路：
+        'dvdf'
+        初始化一个 dict 去重
+        遍历字符串，若没重复，则添加到 dict, i += 1
+        若重复，则 dict 重建并添加重复的 i 的 index + 1 的字母到 dict，i 回到 index + 2 的位置
+
+        缺点：若不重复的过多，空间太大，且回退的步骤太多
+
+        按我写过的思路再来一遍
+        :param s:
+        :return:
+        '''
+        filter_dict = {}
+        max_len = current_len = 0
+        i = j = 0
+        flag = False
+        while i < len(s):
+            # print filter_dict
+            if filter_dict.get(s[i]) is None:
+                if not flag:
+                    j = i
+                else:
+                    j = i - 2
+                current_len += 1
+                filter_dict[s[i]] = i
+                flag = True
+            else:
+                # current_len = 1
+                # temp_dict = {}
+                # if i < len(s) - 1:
+                #     temp_dict[s[filter_dict[s[i]] + 1]] = filter_dict[s[i]] + 1
+                # i = filter_dict[s[i]] + 2
+                # filter_dict = temp_dict
+                index = filter_dict[s[i]]
+                current_len = i - index
+                flag = True
+                print filter_dict, j
+                for k in range(j, index + 1):
+                    del filter_dict[s[k]]
+                filter_dict[s[i]] = i
+            i += 1
+            max_len = max(max_len, current_len)
+
+        return max_len
+
+rs = ReSolution()
+print rs.lengthOfLongestSubstringMy("abcabcbb")
+
+
 class Solution(object):
     def lengthOfLongestSubstringMy(self, s):
         """
@@ -88,4 +141,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.lengthOfLongestSubstring("ggububgvfk")
+# print solu.lengthOfLongestSubstring("ggububgvfk")
