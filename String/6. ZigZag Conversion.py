@@ -106,6 +106,7 @@ class Solution(object):
         step = 1
         for x in s:
             array[index] += x
+            print array
             if index == 0:
                 step = 1
             elif index == numRows - 1:
@@ -115,4 +116,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.convertFastMy('AB', 1)
+print solu.convertFastMy('PAYPALISHIRING', 3)

@@ -9,6 +9,27 @@ Input:Digit string "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 '''
 
+class ReSolution(object):
+    def letterCombinations(self, digits):
+        '''
+        二刷还是没搞懂怎么做，三个 for 循环方法
+        :param digits:
+        :return:
+        '''
+        mapping = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        ans = ['']
+        for i in range(len(digits)):
+            strs = mapping[int(digits[i])]
+            temp_array = []
+            for c in strs:
+                for j in ans:
+                    temp_array.append(j + c)
+            ans = temp_array
+        return ans
+
+rs = ReSolution()
+print rs.letterCombinations("123")
+
 
 class Solution(object):
     def letterCombinations(self, digits):
@@ -34,6 +55,8 @@ class Solution(object):
         :param digits:
         :return:
         '''
+        if len(digits) == 0:
+            return []
         mapping = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
         ans = ['']
         for i in range(len(digits)):
@@ -46,4 +69,4 @@ class Solution(object):
         return ans
 
 solu = Solution()
-print solu.letterCombinationsAnother('23433')
+print solu.letterCombinationsAnother('234')

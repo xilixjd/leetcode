@@ -5,6 +5,33 @@ Write a function to find the longest common prefix string amongst an array of st
 '''
 
 
+class ReSolution(object):
+    def longestCommonPrefixMy(self, strs):
+        '''
+        思路：
+        从数组的第一个字符串开始作为 compare，遍历之后的数组
+        若 compare 在之后的字符串中 index 不为 0，则从 compare 最后去掉一个字符
+        :param strs:
+        :return:
+        '''
+        if len(strs) == 0:
+            return ""
+        compare_str = strs[0]
+        i = 1
+        while i < len(strs):
+            if strs[i].find(compare_str) != 0:
+                compare_str = compare_str[:len(compare_str) - 1]
+            else:
+                i += 1
+            if len(compare_str) == 0:
+                break
+        return compare_str
+
+
+rs = ReSolution()
+print rs.longestCommonPrefixMy(['c', 'acc', 'ccc'])
+print rs.longestCommonPrefixMy([''])
+
 class Solution(object):
     def longestCommonPrefixMy(self, strs):
         """
@@ -38,6 +65,8 @@ class Solution(object):
         :param strs:
         :return:
         '''
+        if len(strs) == 0:
+            return ""
         pre = strs[0]
         i = 1
         while i < len(strs):
@@ -47,5 +76,5 @@ class Solution(object):
         return pre
 
 solu = Solution()
-print solu.longestCommonPrefixMy(['aa', 'aab'])
+# print solu.longestCommonPrefixMy(['aa', 'aab', 'aabd'])
 print solu.longestCommonPrefixFast(['aa', 'aab'])
