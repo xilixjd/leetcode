@@ -32,43 +32,65 @@ class ReSolution(object):
         filter_dict = {}
         max_len = current_len = 0
         i = j = 0
-        flag = False
+        # flag = True
         while i < len(s):
             # print filter_dict
             if filter_dict.get(s[i]) is None:
-                if not flag:
-                    j = i
-                else:
-                    j = i - 2
+                # if not flag:
+                #     j = i
                 current_len += 1
                 filter_dict[s[i]] = i
-                flag = True
+                # flag = False
             else:
-                # current_len = 1
-                # temp_dict = {}
-                # if i < len(s) - 1:
-                #     temp_dict[s[filter_dict[s[i]] + 1]] = filter_dict[s[i]] + 1
-                # i = filter_dict[s[i]] + 2
-                # filter_dict = temp_dict
-                index = filter_dict[s[i]]
-                current_len = i - index
-                flag = True
-                print filter_dict, j
-                for k in range(j, index + 1):
-                    del filter_dict[s[k]]
-                filter_dict[s[i]] = i
+                # 最后一个例子超时
+                current_len = 1
+                temp_dict = {}
+                if i < len(s) - 1:
+                    temp_dict[s[filter_dict[s[i]] + 1]] = filter_dict[s[i]] + 1
+                i = filter_dict[s[i]] + 2
+                filter_dict = temp_dict
+                # index = filter_dict[s[i]]
+                # current_len = i - index
+                # flag = True
+                # print filter_dict, j, index
+                # for k in range(j, index + 1):
+                #     del filter_dict[s[k]]
+                # filter_dict[s[i]] = i
             i += 1
             max_len = max(max_len, current_len)
-
         return max_len
 
+    def lengthOfLongestSubstringMy2(self, s):
+        '''
+        重复之前个人思路，改良版击败 20%
+        :param s:
+        :return:
+        '''
+        array = []
+        max_len = 0
+        for i in range(len(s)):
+            # print array
+            if s[i] not in array:
+                array.append(s[i])
+            else:
+                index = array.index(s[i])
+                # print array, index, i
+                array.append(s[i])
+                for j in range(index + 1):
+                    array.pop(0)
+            max_len = max(max_len, len(array))
+        return max_len
+
+
 rs = ReSolution()
-print rs.lengthOfLongestSubstringMy("abcabcbb")
+# print rs.lengthOfLongestSubstringMy("abcabcbb")
+print rs.lengthOfLongestSubstringMy2("dvdf")
 
 
 class Solution(object):
     def lengthOfLongestSubstringMy(self, s):
         """
+        暴力法
         无法通过最后一个测试用例，超时
         :type s: str
         :rtype: int

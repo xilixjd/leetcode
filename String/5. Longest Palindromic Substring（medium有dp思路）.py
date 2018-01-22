@@ -18,6 +18,96 @@ Output: "bb"
 '''
 
 
+class ReSolution(object):
+    def longestPalindromeMy(self, s):
+        max_len = 0
+        max_palindrome_str = s[0]
+        for i in range(len(s)):
+            temp_str = s[i]
+            for j in range(i + 1, len(s)):
+                temp_str += s[j]
+                if self.checkPalindrme(temp_str):
+                    if len(temp_str) > max_len:
+                        max_len = len(temp_str)
+                        max_palindrome_str = temp_str
+        return max_palindrome_str
+
+    def checkPalindrme(self, s):
+        i = 0
+        j = len(s) - 1
+        while i <= j:
+            if s[i] != s[j]:
+                return False
+            i += 1
+            j -= 1
+        return True
+
+    def longestPalindromeMy2(self, s):
+        '''
+        二刷看答案得知，还有种方法是动态规划
+        这个思路主要是遍历 s
+        对每个字母向两边展开，展开结果判断是否回文并选出最大回文字符串
+        :param s:
+        :return:
+        '''
+        max_pali_str = s[0]
+        max_len = 0
+        for i in range(len(s)):
+            s1 = self.centerExpand(s, i, i)
+            s2 = self.centerExpand(s, i, i + 1)
+            if len(s1) > max_len:
+                max_pali_str = s1
+                max_len = len(s1)
+            if len(s2) > max_len:
+                max_pali_str = s2
+                max_len = len(s2)
+        return max_pali_str
+
+    def centerExpand(self, s, l, r):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        return s[l+1:r]
+
+    def longestPalindromeDynamic(self, s):
+        '''
+        dp 法，超时
+        思路：
+        i, j 分别为最长回文的左和右
+        s 为字符串
+        一般规则：
+        dp[i][i] 一定是回文，设为 True
+        若 s[i] == s[i + 1] 则 dp[i][i + 1] 一定为回文，设为 True
+        dp 遍历情况：
+        要判断 dp[i][j] 是否为回文，先判断 dp[i + 1][j - 1] 是否为回文，再判断 s[i] == s[j]
+        :param s:
+        :return:
+        '''
+        dp = [[0 for i in range(len(s))] for j in range(len(s))]
+        max_str = s[0]
+        max_len = 1
+        for i in range(len(s)):
+            dp[i][i] = True
+        for i in range(len(s) - 1):
+            if s[i] == s[i + 1]:
+                dp[i][i + 1] = True
+                max_len = 2
+                max_str = s[i: i + 2]
+        # 这里灵活的是需要以长度为遍历对象
+        for length in range(3, len(s) + 1):
+            for i in range(len(s) - 2):
+                j = length + i - 1
+                if j < len(s) and dp[i + 1][j - 1] and s[i] == s[j]:
+                    dp[i][j] = True
+                    max_len = j - i + 1
+                    max_str = s[i: j + 1]
+        return max_str
+
+rs = ReSolution()
+# print rs.longestPalindromeMy("baafb")
+print rs.longestPalindromeDynamic("abcddcba")
+
+
 class Solution(object):
     def longestPalindromeMy(self, s):
         """
