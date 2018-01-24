@@ -28,7 +28,7 @@ class ReSolution(object):
         return ans
 
 rs = ReSolution()
-print rs.letterCombinations("123")
+# print rs.letterCombinations("123")
 
 
 class Solution(object):
@@ -47,6 +47,7 @@ class Solution(object):
                 t = ans.pop(0)
                 for s in mapping[x]:
                     ans.append(t + s)
+            print ans
         return ans
 
     def letterCombinationsAnother(self, digits):
@@ -69,4 +70,4 @@ class Solution(object):
         return ans
 
 solu = Solution()
-print solu.letterCombinationsAnother('234')
+print solu.letterCombinations('234')

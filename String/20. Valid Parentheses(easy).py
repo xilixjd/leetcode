@@ -8,6 +8,34 @@ The brackets must close in the correct order, a
 '''
 
 
+class ReSolution(object):
+    def isValidMy(self, s):
+        stack = [1]
+        for i in range(len(s)):
+            if s[i] == ')':
+                if stack[len(stack) - 1] != '(':
+                    return False
+                else:
+                    stack.pop()
+            elif s[i] == ']':
+                if stack[len(stack) - 1] != '[':
+                    return False
+                else:
+                    stack.pop()
+            elif s[i] == '}':
+                if stack[len(stack) - 1] != '{':
+                    return False
+                else:
+                    stack.pop()
+            else:
+                stack.append(s[i])
+
+        return len(stack) == 1
+
+rs = ReSolution()
+print rs.isValidMy(']')
+
+
 class Solution(object):
     def isValid(self, s):
         '''
