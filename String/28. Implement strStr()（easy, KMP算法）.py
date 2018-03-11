@@ -7,6 +7,24 @@ or -1 if needle is not part of haystack.
 '''
 
 
+class ReSolution(object):
+    def strStr(self, haystack, needle):
+        if len(needle) > len(haystack):
+            return -1
+        if needle == "":
+            return 0
+        j = 0
+        for i in range(len(haystack)):
+            while i + j < len(haystack) and haystack[i + j] == needle[j]:
+                j += 1
+                if j == len(needle):
+                    return i
+            j = 0
+        return -1
+
+re = ReSolution()
+print re.strStr("mississippi", "issipi")
+
 class Solution(object):
     def strStr(self, haystack, needle):
         """
@@ -63,4 +81,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.kmp("aaa", "aa")
+# print solu.kmp("aaa", "aa")

@@ -11,6 +11,39 @@ Both num1 and num2 does not contain any leading zero.
 You must not use any built-in BigInteger library or convert the inputs to integer directly.
 '''
 
+class ReSolution(object):
+    def multiply(self, num1, num2):
+        '''
+        思路：
+        m 位数和 n 位数相乘，得到的结果必然是 m * n + 1 位数或 m * n 位
+        :param num1: str
+        :param num2: str
+        :return: str
+        '''
+        products = [0 for i in range(len(num1) + len(num2))]
+        for i in range(len(num1))[::-1]:
+            for j in range(len(num2))[::-1]:
+                d1 = ord(num1[i]) - ord('0')
+                d2 = ord(num2[j]) - ord('0')
+                # 关键
+                products[i + j + 1] += d1 * d2
+        carry = 0
+        print products
+        for i in range(len(products))[::-1]:
+            temp = (products[i] + carry) % 10
+            carry = (products[i] + carry) / 10
+            products[i] = temp
+        i = 0
+        while len(products) != 0 and products[i] == 0:
+            products.pop(0)
+        if len(products) == 0:
+            return "0"
+        return ''.join([str(c) for c in products])
+
+re = ReSolution()
+print re.multiply('123', '456')
+
+
 
 class Solution(object):
     def multiplyMy(self, num1, num2):
@@ -62,4 +95,4 @@ class Solution(object):
         return ''.join([str(p) for p in products])
 
 solu = Solution()
-print solu.multiplyFast('0', '1')
+# print solu.multiplyFast('0', '1')
