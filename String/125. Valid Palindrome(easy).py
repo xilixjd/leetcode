@@ -15,6 +15,22 @@ This is a good question to ask during an interview.
 For the purpose of this problem, we define empty string as valid palindrome.
 '''
 
+class ReSolution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        def check_alpha_numeric(c):
+            return c.isalpha() or c.isdigit()
+        array = []
+        for i in range(len(s)):
+            if check_alpha_numeric(s[i]):
+                array.append(s[i].lower())
+        return array == array[::-1]
+
+re = ReSolution()
+print re.isPalindrome("A man, a plan, a canal: Panama")
 
 class Solution(object):
     def isPalindromeMy(self, s):

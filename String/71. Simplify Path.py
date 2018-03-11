@@ -35,4 +35,4 @@ class Solution(object):
         return '/' if len(res) == 0 else res
 
 solu = Solution()
-print solu.simplifyPath('/./home/dir')
+print solu.simplifyPath('/../home/dir')

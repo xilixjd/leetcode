@@ -12,6 +12,7 @@ Return "100".
 class ReSolution(object):
     def addBinary(self, a, b):
         """
+        4.29%
         :type a: str
         :type b: str
         :rtype: str

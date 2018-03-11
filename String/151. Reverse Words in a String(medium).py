@@ -8,6 +8,24 @@ Given s = "the sky is blue",
 return "blue is sky the".
 '''
 
+class ReSolution(object):
+    def reverseWords(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        words_array = s.split(" ")
+        print words_array
+        array = []
+        for words in words_array:
+            if not (words.isspace() or len(words) == 0):
+                array.append(words)
+        array.reverse()
+        return ' '.join(array)
+
+re = ReSolution()
+print re.reverseWords("the sky  is blue")
+
 
 class Solution(object):
     def reverseWordsMy(self, s):

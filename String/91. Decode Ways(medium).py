@@ -15,6 +15,37 @@ Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
 The number of ways decoding "12" is 2.
 '''
 
+class ReSolution(object):
+    def numDecodings(self, s):
+        """
+        思路：
+        array[i] 表示 s[0..i-1] 的解码方法
+        则有 array[i] = array[i - 1] + array[i - 2]
+        且有以下限制：
+        1。s[i - 1] 不能为 0，若为 0 则 array[i] = array[i - 2]
+        2。s[i - 2: i] 中第一个数不能为 0，且 s[i - 2: i] 数必须在 1-26 之间
+        :type s: str
+        :rtype: int
+        """
+        if len(s) == 0:
+            return 0
+        if s[0] == "0":
+            return 0
+        array = [0 for i in range(len(s) + 1)]
+        array[0] = 1
+        array[1] = 1
+        for i in range(2, len(array)):
+            if s[i - 1] != "0":
+                array[i] = array[i - 1]
+            if s[i - 2] != "0":
+                temp = int(s[i - 2: i])
+                if 0 < temp <= 26:
+                    array[i] += array[i - 2]
+        return array[len(s)]
+
+re = ReSolution()
+print re.numDecodings('01')
+
 
 class Solution(object):
     def numDecodings(self, s):
@@ -45,6 +76,7 @@ class Solution(object):
                 temp = int(s[i - 2:i])
                 if 0 < temp <= 26:
                     number[i] += number[i - 2]
+        print number
         return number[len(s)]
 
 
