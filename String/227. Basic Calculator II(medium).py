@@ -12,7 +12,52 @@ Some examples:
 " 3+5 / 2 " = 5
 Note: Do not use the eval built-in library function.
 '''
-import math
+
+class ReSolution(object):
+    def calculate(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        def get_division(num1, num2):
+            if num2 == 0:
+                return False
+            if num1 > 0 and num2 > 0:
+                return num1 / num2
+            else:
+                if num2 < 0:
+                    num2 = -num2
+                if num1 < 0:
+                    num1 = -num1
+                return -(num1 / num2)
+        stack = []
+        num = 0
+        sign = "+"
+        for i in range(len(s)):
+            if s[i].isdigit():
+                num = num * 10 + int(s[i])
+            if not s[i].isspace() and not s[i].isdigit() or i == len(s) - 1:
+                if sign == "+":
+                    pass
+                elif sign == "-":
+                    num = -num
+                elif sign == "*":
+                    num = stack[-1] * num
+                    stack.pop()
+                elif sign == "/":
+                    num = get_division(stack[-1], num)
+                    stack.pop()
+                stack.append(num)
+                num = 0
+                sign = s[i]
+        total = 0
+        for s in stack:
+            total += s
+        return total
+
+re = ReSolution()
+print re.calculate("3-5/2*2-1+3")
+
 
 class Solution(object):
     def calculate(self, s):
@@ -59,4 +104,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.calculate('14-3/2')
+print solu.calculate('3-5/2*2-1+3 ')

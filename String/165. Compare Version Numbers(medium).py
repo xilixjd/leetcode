@@ -13,6 +13,36 @@ Here is an example of version numbers ordering:
 0.1 < 1.1 < 1.2 < 13.37
 '''
 
+class ReSolution(object):
+    def compareVersion(self, version1, version2):
+        """
+        考虑 1.1.0 和 1.1 都是一样的
+        :type version1: str
+        :type version2: str
+        :rtype: int
+        """
+        v1_array = version1.split(".")
+        v2_array = version2.split(".")
+        i = j = 0
+        while i < len(v1_array) and j < len(v2_array):
+            if int(v1_array[i]) > int(v2_array[j]):
+                return 1
+            elif int(v1_array[i]) < int(v2_array[j]):
+                return -1
+            else:
+                i += 1
+                j += 1
+        for x1 in v1_array[i:]:
+            if int(x1) > 0:
+                return 1
+        for x2 in v2_array[j:]:
+            if int(x2) > 0:
+                return -1
+        return 0
+
+re = ReSolution()
+print re.compareVersion('1.1.0', '1.1')
+
 class Solution(object):
     def compareVersionMy(self, version1, version2):
         """

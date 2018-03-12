@@ -13,6 +13,25 @@ canConstruct("aa", "ab") -> false
 canConstruct("aa", "aab") -> true
 '''
 
+class ReSolution(object):
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+        m_array = list(magazine)
+        for c in ransomNote:
+            if c in m_array:
+                m_array.remove(c)
+            else:
+                return False
+        return True
+
+re = ReSolution()
+print re.canConstruct("bg", "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj")
+
+
 class Solution(object):
     def canConstructMy(self, ransomNote, magazine):
         """

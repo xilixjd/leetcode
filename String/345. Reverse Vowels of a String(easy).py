@@ -11,6 +11,30 @@ Given s = "leetcode", return "leotcede".
 Note:
 The vowels does not include the letter "y".
 '''
+
+class ReSolution(object):
+    def reverseVowels(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        s_array = list(s)
+        record_array = []
+        for i in range(len(s_array)):
+            if s[i] in vowels:
+                record_array.append(i)
+        i = 0
+        j = len(record_array) - 1
+        while i < j:
+            s_array[record_array[i]], s_array[record_array[j]] = s_array[record_array[j]], s_array[record_array[i]]
+            i += 1
+            j -= 1
+        return ''.join(s_array)
+
+re = ReSolution()
+print re.reverseVowels("leetcode")
+
 import copy
 class Solution(object):
     def reverseVowelsMy(self, s):
