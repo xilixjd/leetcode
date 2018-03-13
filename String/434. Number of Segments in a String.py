@@ -43,4 +43,4 @@ class Solution(object):
 
 solu = Solution()
 
-print solu.countSegments2('Hello,  ,my name is John   ')
+print solu.countSegments2(' ')
