@@ -17,6 +17,35 @@ Input: "FlaG"
 Output: False
 '''
 
+
+class ReSolution(object):
+    def detectCapitalUse(self, word):
+        """
+        :type word: str
+        :rtype: bool
+        """
+        if len(word) == 0 or len(word) == 1:
+            return True
+        first_char = word[0]
+        second_char = word[1]
+        if first_char.isupper() and second_char.islower():
+            for i in range(2, len(word)):
+                if word[i].isupper():
+                    return False
+        elif first_char.isupper() and second_char.isupper():
+            for i in range(2, len(word)):
+                if word[i].islower():
+                    return False
+        elif first_char.islower():
+            for i in range(1, len(word)):
+                if word[i].isupper():
+                    return False
+        return True
+
+re = ReSolution()
+print re.detectCapitalUse("SfdsS")
+
+
 class Solution(object):
     def detectCapitalUseMy(self, word):
         """

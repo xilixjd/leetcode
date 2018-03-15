@@ -16,6 +16,43 @@ All the given strings' lengths will not exceed 10.
 The length of the given list will be in the range of [2, 50].
 '''
 
+
+class ReSolution(object):
+    def findLUSlength(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: int
+        """
+        def is_subsequence(s1, s2):
+            if s1 == s2:
+                return True
+            if len(s1) > len(s2):
+                return False
+            i = 0
+            for c in s2:
+                if i < len(s1) and s1[i] == c:
+                    i += 1
+            return i == len(s1)
+        i = j = 0
+        res = -1
+        while i < len(strs):
+            while j < len(strs):
+                if i == j:
+                    j += 1
+                    continue
+                if is_subsequence(strs[i], strs[j]):
+                    break
+                j += 1
+            if j == len(strs):
+                res = max(res, len(strs[i]))
+            i += 1
+            j = 0
+        return res
+
+re = ReSolution()
+print re.findLUSlength(["bca", "bc", "bc"])
+
+
 class Solution(object):
     def findLUSlength(self, strs):
         """
@@ -81,5 +118,5 @@ class Solution(object):
                 
 
 solu = Solution()
-print solu.findLUSlengthLow(["aaa","aa","a"])
+print solu.findLUSlengthLow(["abc","accbdc","abc"])
 # solu.wh(3)

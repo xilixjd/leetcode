@@ -14,6 +14,30 @@ The string consists of lower English letters only.
 Length of the given string and k will in the range [1, 10000]
 '''
 
+
+class ReSolution(object):
+    def reverseStr(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: str
+        """
+        array = list(s)
+        i = 0
+        while i < len(array):
+            if len(array) - i - 1 < k:
+                array[i:] = array[i:][::-1]
+            elif k <= len(array) - i < 2 * k:
+                array[i: i + k] = array[i: i + k][::-1]
+            else:
+                array[i: i + k] = array[i: i + k][::-1]
+            i = i + 2 * k
+        return ''.join(array)
+
+re = ReSolution()
+print re.reverseStr("abcdefg", 2)
+
+
 class Solution(object):
     def reverseStr(self, s, k):
         """

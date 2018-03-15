@@ -21,6 +21,18 @@ Both strings' lengths will not exceed 100.
 Only letters from a ~ z will appear in input strings.
 '''
 
+class ReSolution(object):
+    def findLUSlength(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: int
+        """
+        if a == b:
+            return -1
+        return len(a) if len(a) > len(b) else len(b)
+
+
 class Solution(object):
     def findLUSlengthMy(self, a, b):
         """
@@ -41,4 +53,4 @@ class Solution(object):
         return max(max_count1, max_count2)
 
 solu = Solution()
-print solu.findLUSlengthMy('aefawfawfawfaw', 'aefawfeawfwafwaef')
+print solu.findLUSlengthMy('abab', 'cababa')
