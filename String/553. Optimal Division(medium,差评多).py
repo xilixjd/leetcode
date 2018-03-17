@@ -33,10 +33,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: str
         """
+        if len(nums) == 1:
+            return str(nums[0])
+        if len(nums) == 2:
+            return str(nums[0]) + '/' + str(nums[1])
         num_str = ""
+
         for i in range(len(nums)):
             if i == 0:
-                num_str += str(nums[i]) + '/('
+                num_str += str(nums[i]) + "/("
             elif i == len(nums) - 1:
                 num_str += str(nums[i]) + ')'
             else:
