@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 '''
-You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+You are given two non-empty linked lists representing two non-negative integers.
+The digits are stored in reverse order and each of their nodes contain a single digit.
+Add the two numbers and return it as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
@@ -13,6 +15,53 @@ class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
+
+class ReSolution:
+# @return a ListNode
+    def addTwoNumbers(self, l1, l2):
+        carry = 0
+        p = root = ListNode(0)
+        while l1 and l2:
+            temp = (carry + l1.val + l2.val) % 10
+            carry = (carry + l1.val + l2.val) / 10
+            temp_node = ListNode(temp)
+            p.next = temp_node
+            p = p.next
+            l1 = l1.next
+            l2 = l2.next
+        while l1:
+            temp = (carry + l1.val) % 10
+            carry = (carry + l1.val) / 10
+            temp_node = ListNode(temp)
+            p.next = temp_node
+            p = p.next
+            l1 = l1.next
+        while l2:
+            temp = (carry + l2.val) % 10
+            carry = (carry + l2.val) / 10
+            temp_node = ListNode(temp)
+            p.next = temp_node
+            p = p.next
+            l2 = l2.next
+        if carry != 0:
+            temp_node = ListNode(carry)
+            p.next = temp_node
+            p = p.next
+        return root.next
+
+re = ReSolution()
+l1 = ListNode(1000)
+l1.next = ListNode(4)
+l1.next.next = ListNode(3)
+l1.next.next.next = ListNode(2)
+l2 = ListNode(5)
+l2.next = ListNode(6)
+l2.next.next = ListNode(4)
+l2.next.next.next = ListNode(6)
+a = re.addTwoNumbers(l1, l2)
+while a:
+    print a.val
+    a = a.next
 
 class Solution:
 # @return a ListNode
@@ -66,16 +115,16 @@ class Solution:
 
 
 
-solu = Solution()
-l1 = ListNode(1000)
-l1.next = ListNode(4)
-l1.next.next = ListNode(3)
-l1.next.next.next = ListNode(2)
-l2 = ListNode(5)
-l2.next = ListNode(6)
-l2.next.next = ListNode(4)
-l2.next.next.next = ListNode(6)
-a = solu.addTwoNumbersMy(l1, l2)
-while a:
-    print a.val
-    a = a.next
+# solu = Solution()
+# l1 = ListNode(1000)
+# l1.next = ListNode(4)
+# l1.next.next = ListNode(3)
+# l1.next.next.next = ListNode(2)
+# l2 = ListNode(5)
+# l2.next = ListNode(6)
+# l2.next.next = ListNode(4)
+# l2.next.next.next = ListNode(6)
+# a = solu.addTwoNumbers(l1, l2)
+# while a:
+#     print a.val
+#     a = a.next

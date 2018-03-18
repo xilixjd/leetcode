@@ -14,6 +14,39 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+class ReSolution(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        root = ListNode(0)
+        root.next = head
+        p = root.next
+        p_prev = root
+        while p is not None and p.next is not None:
+            p1 = p.next
+            p2 = p.next.next
+            p_prev.next = p1
+            p1.next = p
+            p.next = p2
+            p_prev = p
+            p = p.next
+        return root.next
+
+listNode = ListNode(1)
+listNode.next = ListNode(2)
+listNode.next.next = ListNode(3)
+listNode.next.next.next = ListNode(4)
+# listNode.next.next.next.next = ListNode(5)
+
+re = ReSolution()
+p = re.swapPairs(listNode)
+while p:
+    print p.val
+    p = p.next
+
+
 class Solution(object):
     def swapPairs(self, head):
         """
@@ -40,10 +73,10 @@ class Solution(object):
         print n.next.val
         return n.next
 
-listNode = ListNode(1)
-listNode.next = ListNode(2)
-listNode.next.next = ListNode(3)
-listNode.next.next.next = ListNode(4)
-
-solu = Solution()
-print solu.swapPairs(listNode).next.next.next.val
+# listNode = ListNode(1)
+# listNode.next = ListNode(2)
+# listNode.next.next = ListNode(3)
+# listNode.next.next.next = ListNode(4)
+#
+# solu = Solution()
+# print solu.swapPairs(listNode).next.next.next.val
