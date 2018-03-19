@@ -15,6 +15,38 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
+class ReSolution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        p = head
+        root = ListNode(0)
+        prev = root
+        while p:
+            while p and p.next and p.val == p.next.val:
+                p = p.next
+            prev.next = p
+            prev = p
+            p = p.next
+        return root.next
+
+listNode = ListNode(1)
+listNode.next = ListNode(1)
+# listNode.next.next = ListNode(3)
+# listNode.next.next.next = ListNode(4)
+
+re = ReSolution()
+p = re.deleteDuplicates(listNode)
+while p:
+    print p.val
+    p = p.next
+
+
+
+
 class Solution(object):
     def deleteDuplicates(self, head):
         """
@@ -30,10 +62,10 @@ class Solution(object):
             n = n.next
         return head
 
-listNode = ListNode(1)
+# listNode = ListNode(1)
 # listNode.next = ListNode(1)
 # listNode.next.next = ListNode(3)
 # listNode.next.next.next = ListNode(4)
-
-solu = Solution()
-print solu.deleteDuplicates(listNode)
+#
+# solu = Solution()
+# print solu.deleteDuplicates(listNode)

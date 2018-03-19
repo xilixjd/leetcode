@@ -19,6 +19,58 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
+class ReSolution(object):
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        root = ListNode(0)
+        c_head = head
+        root.next = head
+        first = root
+        if head is None or m > n:
+            return head
+        length = 0
+        while c_head:
+            length += 1
+            c_head = c_head.next
+        if length < m:
+            return head
+        if length < n:
+            n = length
+        for i in range(m - 2):
+            first = first.next
+        p = first.next
+        prev = None
+        k = n - m
+        reverse_last = p
+        while p and k >= 0:
+            p1 = p.next
+            p.next = prev
+            prev = p
+            p = p1
+            k -= 1
+        last = p
+        first.next = p
+        reverse_last.next = last
+        return root.next
+
+
+a = listNode = ListNode(1)
+listNode.next = ListNode(4)
+# a = listNode.next = ListNode(3)
+
+re = ReSolution()
+p = re.reverseBetween(listNode, 1, 2)
+while p:
+    print p.val
+    p = p.next
+
+
 class Solution(object):
     def reverseBetween(self, head, m, n):
         """
@@ -72,4 +124,4 @@ listNode.next = ListNode(4)
 # a = listNode.next = ListNode(3)
 
 solu = Solution()
-print solu.reverseBetween(listNode, 1, 2).next.val
+# print solu.reverseBetween(listNode, 1, 2).next.val

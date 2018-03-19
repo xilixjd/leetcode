@@ -16,6 +16,45 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
+class ReSolution(object):
+    def partition(self, head, x):
+        """
+        :type head: ListNode
+        :type x: int
+        :rtype: ListNode
+        """
+        left = left_head = ListNode(0)
+        right = right_head = ListNode(0)
+        p = head
+        while p:
+            if p.val < x:
+                left.next = p
+                left = left.next
+            else:
+                right.next = p
+                right = right.next
+            p = p.next
+        if right:
+            right.next = None
+        left.next = right_head.next
+        return left_head.next
+
+listNode = ListNode(1)
+listNode.next = ListNode(4)
+listNode.next.next = ListNode(3)
+listNode.next.next.next = ListNode(2)
+listNode.next.next.next.next = ListNode(5)
+listNode.next.next.next.next.next = ListNode(2)
+re = ReSolution()
+# print re.partition(listNode, 3).next.next.next.next.val
+p = re.partition(listNode, 3)
+while p:
+    print p.val
+    p = p.next
+
+
+
 class Solution(object):
     def partition(self, head, x):
         """
@@ -38,11 +77,11 @@ class Solution(object):
         lList.next = rHead.next
         return lHead.next
 
-listNode = ListNode(1)
-listNode.next = ListNode(4)
-listNode.next.next = ListNode(3)
-listNode.next.next.next = ListNode(2)
-listNode.next.next.next.next = ListNode(5)
-listNode.next.next.next.next.next = ListNode(2)
-solu = Solution()
-print solu.partition(listNode, 3).next.next.next.next.val
+# listNode = ListNode(1)
+# listNode.next = ListNode(4)
+# listNode.next.next = ListNode(3)
+# listNode.next.next.next = ListNode(2)
+# listNode.next.next.next.next = ListNode(5)
+# listNode.next.next.next.next.next = ListNode(2)
+# solu = Solution()
+# print solu.partition(listNode, 3).next.next.next.next.val
