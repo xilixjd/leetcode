@@ -17,6 +17,38 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def sortedListToBST(self, head):
+        """
+        :type head: ListNode
+        :rtype: TreeNode
+        """
+        def gen_BST(nums, start, end):
+            if start > end:
+                return
+            mid = (start + end) / 2
+            root = TreeNode(nums[mid])
+            root.left = gen_BST(nums, start, mid - 1)
+            root.right = gen_BST(nums, mid + 1, end)
+            return root
+        h = head
+        nums = []
+        while h:
+            nums.append(h.val)
+            h = h.next
+        tree = gen_BST(nums, 0, len(nums) - 1)
+        return tree
+
+listNode = ListNode(1)
+listNode.next = ListNode(4)
+listNode.next.next = ListNode(5)
+listNode.next.next.next = ListNode(6)
+
+solu = ReSolution()
+print solu.sortedListToBST(listNode).right.val
+
+
 class Solution(object):
     def sortedListToBST(self, head):
         """
@@ -43,10 +75,10 @@ class Solution(object):
         root.right = self.genBST(nums, mid + 1, end)
         return root
 
-listNode = ListNode(1)
-listNode.next = ListNode(4)
-listNode.next.next = ListNode(5)
-listNode.next.next.next = ListNode(6)
-
-solu = Solution()
-print solu.sortedListToBST(listNode).right
+# listNode = ListNode(1)
+# listNode.next = ListNode(4)
+# listNode.next.next = ListNode(5)
+# listNode.next.next.next = ListNode(6)
+#
+# solu = Solution()
+# print solu.sortedListToBST(listNode).right

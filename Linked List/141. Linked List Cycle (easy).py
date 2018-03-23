@@ -14,6 +14,22 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
+class ReSolution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        slow = fast = head
+        while slow and fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
+
+
 class Solution(object):
     def hasCycle(self, head):
         """
