@@ -10,6 +10,25 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 '''
+
+
+class ReSolution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        nums_dict = {}
+        for i in range(len(nums)):
+            nums_dict[nums[i]] = i
+        for i in range(len(nums)):
+            diff = target - nums[i]
+            if nums_dict.get(diff):
+                return [i, nums_dict[diff]]
+        return None
+
+
 class Solution(object):
     def twoSum(self, nums, target):
         """

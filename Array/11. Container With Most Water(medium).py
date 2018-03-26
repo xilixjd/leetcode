@@ -10,6 +10,27 @@ Note: You may not slant the container and n is at least 2.
 '''
 
 
+class ReSolution(object):
+    def maxAreaMy(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        i = 0
+        j = len(height) - 1
+        max_countainer = 0
+        while i < j:
+            min_h = min(height[i], height[j])
+            max_countainer = max(max_countainer, min_h * (j - i))
+            if height[i] < height[j]:
+                i += 1
+            else:
+                j -= 1
+        return max_countainer
+
+re = ReSolution()
+print re.maxAreaMy([5,4,3,2,4])
+
 class Solution(object):
     def maxAreaMy(self, height):
         """
@@ -68,4 +89,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.maxAreaMy2([3,2,1,3])
+print solu.maxAreaMy2([5,4,3,2,4])

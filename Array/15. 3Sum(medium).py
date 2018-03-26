@@ -15,6 +15,17 @@ A solution set is:
 '''
 
 
+class ReSolution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        res = []
+        for i in range(len(nums)):
+
+
 class Solution(object):
     def threeSum(self, nums):
         """
