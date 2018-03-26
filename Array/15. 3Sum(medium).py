@@ -23,7 +23,29 @@ class ReSolution(object):
         """
         nums.sort()
         res = []
-        for i in range(len(nums)):
+        for i in range(len(nums) - 2):
+            if i == 0 or (i > 0 and nums[i] != nums[i-1]):
+                low = i + 1
+                high = len(nums) - 1
+                total = -nums[i]
+                while low < high:
+                    if nums[low] + nums[high] == total:
+                        res.append([nums[i], nums[low], nums[high]])
+                        while low < high and nums[low] == nums[low + 1]:
+                            low += 1
+                        while low < high and nums[high] == nums[high - 1]:
+                            high -= 1
+                        low += 1
+                        high -= 1
+                    elif nums[low] + nums[high] < total:
+                        low += 1
+                    else:
+                        high -= 1
+        return res
+
+
+solu = ReSolution()
+print solu.threeSum([-1, 0, 1, 2, -1, -4])
 
 
 class Solution(object):
@@ -57,7 +79,7 @@ class Solution(object):
     def threeSumMy(self, nums):
         nums.sort()
         res = []
-        for i in range(len(nums)):
+        for i in range(len(nums) - 2):
             if i == 0 or (i > 0 and nums[i] != nums[i - 1]):
                 l = i + 1
                 r = len(nums) - 1
@@ -76,5 +98,5 @@ class Solution(object):
                         r -= 1
         return res
 
-solu = Solution()
-print solu.threeSumMy([0, 0])
+# solu = Solution()
+# print solu.threeSumMy([0, 0])
