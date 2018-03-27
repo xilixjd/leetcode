@@ -10,6 +10,50 @@ otherwise return -1.
 You may assume no duplicate exists in the array.
 '''
 
+
+class ReSolution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        def binary_search(nums, low, high, target):
+            while low <= high:
+                mid = (low + high) / 2
+                if nums[mid] < target:
+                    low = mid + 1
+                elif nums[mid] > target:
+                    high = mid - 1
+                else:
+                    return mid
+            return -1
+
+        if len(nums) == 0:
+            return -1
+        if len(nums) == 1:
+            return 0 if nums[0] == target else -1
+        low = 0
+        high = len(nums) - 1
+        while nums[low] >= nums[high]:
+            if high - low == 1:
+                break
+            mid = (low + high) / 2
+            if nums[low] <= nums[mid]:
+                low = mid
+            if nums[high] >= nums[mid]:
+                high = mid
+        if nums[0] <= target <= nums[high - 1]:
+            index = binary_search(nums, 0, high - 1, target)
+        else:
+            index = binary_search(nums, high, len(nums) - 1, target)
+        return index
+
+
+re = ReSolution()
+print re.search([1], 1)
+
+
 class Solution(object):
     def search(self, nums, target):
         """
@@ -76,5 +120,5 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.searchMy([1,2], 0)
+print solu.searchMy([1], 1)
 # print solu.binarySearch([1,2,3,4,5,6,7], 7)

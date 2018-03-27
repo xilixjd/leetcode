@@ -12,6 +12,26 @@ Given input array nums = [3,2,2,3], val = 3
 Your function should return length = 2, with the first two elements of nums being 2.
 '''
 
+
+class ReSolution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        i = 0
+        while i < len(nums):
+            if nums[i] == val:
+                del nums[i]
+            else:
+                i += 1
+        return len(nums)
+
+re = ReSolution()
+print re.removeElement([2,2,3,1,3], 3)
+
+
 class Solution(object):
     def removeElement(self, nums, val):
         """

@@ -44,7 +44,6 @@ class ReSolution(object):
     def nextGreaterElement2(self, n):
         """
         思路2：
-        全排列，超时
         :type n: int
         :rtype: int
         """
@@ -93,7 +92,7 @@ class ReSolution(object):
 
 
 re = ReSolution()
-print re.nextGreaterElement2(199999)
+print re.nextGreaterElement2(123)
 
 
 import itertools

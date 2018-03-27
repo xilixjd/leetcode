@@ -18,6 +18,41 @@ A solution set is:
 '''
 
 
+class ReSolution(object):
+    def fourSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        res = []
+        nums.sort()
+        for i in range(len(nums) - 3):
+            for j in range(i + 1, len(nums) - 2):
+                total = target - nums[i] - nums[j]
+                low = j + 1
+                high = len(nums) - 1
+                while low < high:
+                    if total == nums[low] + nums[high]:
+                        if [nums[i], nums[j], nums[low], nums[high]] not in res:
+                            res.append([nums[i], nums[j], nums[low], nums[high]])
+                        while low < high and nums[low] == nums[low + 1]:
+                            low += 1
+                        while low < high and nums[high] == nums[high - 1]:
+                            high -= 1
+                        low += 1
+                        high -= 1
+                    elif total < nums[low] + nums[high]:
+                        high -= 1
+                    else:
+                        low += 1
+        return res
+
+re = ReSolution()
+print re.fourSum([-3,-2,-1,0,0,1,2,3], 0)
+
+
+
 class Solution(object):
     def fourSumMy(self, nums, target):
         """
@@ -32,7 +67,7 @@ class Solution(object):
                 sums = target - nums[i] - nums[j]
                 lo = j + 1
                 hi = len(nums) - 1
-                print nums[i], nums[j], nums[lo], nums[hi]
+                # print nums[i], nums[j], nums[lo], nums[hi]
                 while lo < hi:
                     if nums[lo] + nums[hi] == sums:
                         if not [nums[i], nums[j], nums[lo], nums[hi]] in res:
@@ -57,7 +92,7 @@ class Solution(object):
             for j in range(i + 1, len(nums)):
                 l = j + 1
                 r = len(nums) - 1
-                print i, j, l, r
+                # print i, j, l, r
                 while l < r:
                     sums = nums[i] + nums[j] + nums[l] + nums[r]
                     if sums == target:
@@ -76,4 +111,4 @@ class Solution(object):
         return res
 
 solu = Solution()
-print solu.fourSumMy2([-1,0,1,2,-1,-4], -1)
+print solu.fourSumMy([-3,-2,-1,0,0,1,2,3], 0)

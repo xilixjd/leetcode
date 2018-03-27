@@ -11,6 +11,25 @@ Your function should return length = 2, with the first two elements of nums bein
 what you leave beyond the new length.
 '''
 
+
+class ReSolution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        i = 1
+        while i < len(nums):
+            if nums[i] == nums[i - 1]:
+                del nums[i - 1]
+            else:
+                i += 1
+        return len(nums)
+
+re = ReSolution()
+print re.removeDuplicates([1,1,2,2,3,3])
+
+
 class Solution(object):
     def removeDuplicates(self, nums):
         """

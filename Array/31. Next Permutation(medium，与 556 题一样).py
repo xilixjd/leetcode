@@ -13,6 +13,92 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 '''
 
 import random
+
+class ReSolution(object):
+    def nextPermutation(self, nums):
+        """
+        全排列法，不符合题意，且用时过长
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        def permutation(nums):
+            if len(nums) == 0:
+                return ""
+            if len(nums) == 1:
+                return nums
+            res = []
+            for i in range(len(nums)):
+                for j in permutation(nums[:i] + nums[i + 1:]):
+                    res.append(nums[i] + j)
+            return res
+
+        nums_array = [str(n) for n in nums]
+        nums_str = "".join(nums_array)
+        permute_nums_str = permutation(nums_str)
+        permute_nums = [int(p) for p in permute_nums_str]
+        permute_nums.sort()
+        index = permute_nums.index(int(nums_str))
+        print permute_nums
+        p_index = index + 1 if index != len(permute_nums) - 1 else 0
+        return [int(p) for p in list(str(permute_nums[p_index]))]
+
+    def nextPermutation1(self, nums):
+        '''
+        思路与 556 题一样
+        :param nums:
+        :return:
+        '''
+        def find_bigger_and_swap(nums, index):
+            swap_index = index + 1
+            sign = nums[index]
+            bigger = nums[index + 1]
+            for i in range(index + 1, len(nums)):
+                if nums[i] > sign:
+                    if nums[i] < bigger:
+                        bigger = nums[i]
+                        swap_index = i
+            nums[swap_index], nums[index] = nums[index], nums[swap_index]
+
+        def find_last_increase(nums):
+            index = -1
+            for i in range(len(nums) - 1):
+                if nums[i + 1] > nums[i]:
+                    index = i
+            return index
+
+        def partition(nums, start, end):
+            index = random.randint(start, end)
+            nums[index], nums[end] = nums[end], nums[index]
+            small = start - 1
+            for i in range(start, end):
+                if nums[i] < nums[end]:
+                    small += 1
+                    if small != i:
+                        nums[small], nums[i] = nums[i], nums[small]
+            small += 1
+            nums[small], nums[end] = nums[end], nums[small]
+            return small
+
+        def quickSort(nums, start, end):
+            if start > end:
+                return
+            index = partition(nums, start, end)
+            quickSort(nums, start, index - 1)
+            quickSort(nums, index + 1, end)
+
+        index = find_last_increase(nums)
+        if index == -1:
+            nums.reverse()
+        find_bigger_and_swap(nums, index)
+        quickSort(nums, index + 1, len(nums) - 1)
+        print nums
+
+
+re = ReSolution()
+print re.nextPermutation1([1,3,2])
+
+
+
 class Solution(object):
     def nextPermutation(self, nums):
         """
@@ -127,6 +213,6 @@ class Solution(object):
 
 
 solu = Solution()
-solu.nextPermutationMy([5,4,7,5,3,2])
-solu.nextPermutationMy([1,3,2])
+# solu.nextPermutationMy([5,4,7,5,3,2])
+# solu.nextPermutationMy([1,3,2])
 #[5,5,2,3,4,7]
