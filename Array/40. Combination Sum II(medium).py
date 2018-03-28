@@ -19,6 +19,38 @@ A solution set is:
 '''
 
 import copy
+
+
+class ReSolution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        def back_track(start, candidates, remain, tempList, res):
+            if remain == 0:
+                # if tempList not in res:
+                res.append(copy.copy(tempList))
+            if remain < 0:
+                return
+            for i in range(start, len(candidates)):
+                if i != start and candidates[i] == candidates[i - 1]:
+                    continue
+                tempList.append(candidates[i])
+                back_track(i + 1, candidates, remain - candidates[i], tempList, res)
+                tempList.pop()
+
+        res = []
+        tempList = []
+        candidates.sort()
+        back_track(0, candidates, target, tempList, res)
+        return res
+
+re = ReSolution()
+print re.combinationSum([2,2,2], 4)
+
+
 class Solution(object):
     def combinationSum2(self, candidates, target):
         """
@@ -63,4 +95,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
+print solu.combinationSum2([2,2,2], 4)

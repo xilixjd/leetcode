@@ -13,6 +13,47 @@ return [3, 4].
 '''
 
 
+class ReSolution(object):
+    def searchRange1(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        def front_binary_search(nums, target):
+            low = 0
+            high = len(nums) - 1
+            index = -1
+            while low <= high:
+                mid = (low + high) / 2
+                if nums[mid] >= target:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+                if target == nums[mid]:
+                    index = mid
+            return index
+
+        def back_binary_search(nums, target):
+            low = 0
+            high = len(nums) - 1
+            index = -1
+            while low <= high:
+                mid = (low + high) / 2
+                if nums[mid] > target:
+                    high = mid - 1
+                elif nums[mid] <= target:
+                    low = mid + 1
+                if nums[mid] == target:
+                    index = mid
+            return index
+
+        return [front_binary_search(nums, target), back_binary_search(nums, target)]
+
+re = ReSolution()
+print re.searchRange1([1, 2, 3, 4, 5, 8, 19], 8)
+
+
 class Solution(object):
     def searchRange1(self, nums, target):
         """

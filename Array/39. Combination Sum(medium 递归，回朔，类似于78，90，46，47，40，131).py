@@ -18,6 +18,39 @@ A solution set is:
 '''
 
 import copy
+
+
+class ReSolution(object):
+    def combinationSum(self, candidates, target):
+        """
+        回朔法，与以下几题有关联
+        https://leetcode.com/problems/combination-sum/discuss/16502/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        def back_track(start, candidates, remain, tempList, res):
+            if remain < 0:
+                return
+            if remain == 0:
+                res.append(copy.copy(tempList))
+            for i in range(start, len(candidates)):
+                tempList.append(candidates[i])
+                back_track(i, candidates, remain - candidates[i], tempList, res)
+                tempList.pop()
+
+        tempList = []
+        res = []
+        candidates.sort()
+        back_track(0, candidates, target, tempList, res)
+        return res
+
+
+re = ReSolution()
+print re.combinationSum([10, 1, 2, 7, 6, 1, 5], 8)
+
+
+
 class Solution(object):
     def combinationSum(self, candidates, target):
         """
