@@ -20,6 +20,34 @@ If nums = [1,2,2], a solution is:
 '''
 
 import copy
+
+
+class ReSolution(object):
+    def subsetsWithDup(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        def get_subsets(start, nums, tempList, res):
+            res.append(copy.copy(tempList))
+            for i in range(start, len(nums)):
+                if i != start and nums[i] == nums[i - 1]:
+                    continue
+                tempList.append(nums[i])
+                print temp_list, i, start
+                get_subsets(i + 1, nums, tempList, res)
+                tempList.pop()
+
+        temp_list = []
+        res = []
+        nums.sort()
+        get_subsets(0, nums, temp_list, res)
+        return res
+
+re = ReSolution()
+print re.subsetsWithDup(['a', 'a', 'b'])
+
+
 class Solution(object):
     def subsetsWithDup(self, S):
         res = [[]]
@@ -50,4 +78,4 @@ class Solution(object):
             l.pop()
 
 solu = Solution()
-print solu.subsetsWithDupMy([1, 2, 2, 1])
+# print solu.subsetsWithDupMy([1, 2, 2, 1])
