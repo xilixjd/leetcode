@@ -16,7 +16,7 @@ class Solution:
     def printMatrixCircle(self, matrix, colomns, rows, start):
         endX = colomns - 1 - start
         endY = rows - 1 - start
-
+        print 'st', start
         for i in range(start, endX + 1):
             print matrix[start][i]
         if start < endY:
@@ -31,4 +31,4 @@ class Solution:
 
 solu = Solution()
 solu.printMatrix([[1,2,3], [4,5,6], [7,8,9]])
-solu.printMatrix([[1]])
+# solu.printMatrix([[1]])

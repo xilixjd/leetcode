@@ -33,6 +33,7 @@ class Solution(object):
             for i in range(start, len(nums)):
                 if is_palindrome(nums[start: i + 1]):
                     tempList.append(nums[start: i + 1])
+                    print tempList, start, i
                     back_track(i + 1, nums, tempList, res)
                     tempList.pop()
 
@@ -41,4 +42,4 @@ class Solution(object):
         return res
 
 re = Solution()
-print re.partition("aabb")
+print re.partition("aabbc")
