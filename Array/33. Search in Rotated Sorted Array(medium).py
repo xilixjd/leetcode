@@ -49,6 +49,31 @@ class ReSolution(object):
             index = binary_search(nums, high, len(nums) - 1, target)
         return index
 
+    def search2(self, nums, target):
+        '''
+        更好的解法
+        :param nums:
+        :param target:
+        :return:
+        '''
+        low = 0
+        high = len(nums) - 1
+        while low <= high:
+            mid = (low + high) / 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] >= nums[low]:
+                if nums[low] <= target < nums[mid]:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            elif nums[mid] <= nums[high]:
+                if nums[mid] < target <= nums[high]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+        return -1
+
 
 re = ReSolution()
 print re.search([1], 1)

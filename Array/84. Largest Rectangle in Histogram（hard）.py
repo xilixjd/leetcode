@@ -16,6 +16,34 @@ Given heights = [2,1,5,6,2,3],
 return 10.
 '''
 
+class ReSolution(object):
+    def largestRectangleArea(self, heights):
+        stack = []
+        res = 0
+        for i in range(len(heights)):
+            if len(stack) == 0 or heights[i] >= stack[-1]:
+                stack.append(heights[i])
+            else:
+                count = 0
+                while len(stack) != 0 and heights[i] < stack[-1]:
+                    count += 1
+                    res = max(res, count * stack[-1])
+                    stack.pop()
+                while count > 0:
+                    stack.append(heights[i])
+                    count -= 1
+                stack.append(heights[i])
+        count = 1
+        while len(stack) > 0:
+            res = max(res, count * stack[-1])
+            count += 1
+            stack.pop()
+        return res
+
+
+solu = ReSolution()
+print solu.largestRectangleArea([2,1,5,6,2,3,4])
+
 
 class Solution(object):
     def largestRectangleArea(self, heights):
@@ -76,5 +104,6 @@ class Solution(object):
             count += 1
         return res
 
-solu = Solution()
-print solu.largestRectangleArea([2,1,5,6,2,3,4])
+
+# solu = Solution()
+# print solu.largestRectangleArea([2,1,5,6,2,3,4])
