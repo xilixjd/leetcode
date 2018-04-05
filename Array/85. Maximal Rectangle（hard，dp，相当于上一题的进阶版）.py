@@ -13,6 +13,53 @@ For example, given the following matrix:
 Return 6.
 '''
 
+
+class ReSolution(object):
+    def maximalRectangle(self, matrix):
+        """
+        :type matrix: List[List[str]]
+        :rtype: int
+        """
+        def calc_area(nums):
+            stack = []
+            res = 0
+            for i in range(len(nums)):
+                if len(stack) == 0 or nums[i] >= stack[-1]:
+                    stack.append(nums[i])
+                else:
+                    count = 0
+                    while len(stack) != 0 and nums[i] < stack[-1]:
+                        count += 1
+                        res = max(res, stack[-1] * count)
+                        stack.pop()
+                    while count > 0:
+                        stack.append(nums[i])
+                        count -= 1
+                    stack.append(nums[i])
+            count = 0
+            while len(stack) != 0:
+                count += 1
+                res = max(res, stack[-1] * count)
+                stack.pop()
+            return res
+
+        if len(matrix) == 0:
+            return 0
+        heights = [0 for i in range(len(matrix[0]))]
+        area = 0
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                heights[j] = 0 if int(matrix[i][j]) == 0 else heights[j] + 1
+            area = max(area, calc_area(heights))
+        return area
+
+re = ReSolution()
+# print re.maximalRectangle([["1","0","1","0","0"],
+#                            ["1","0","1","1","1"],
+#                            ["1","1","1","1","1"],
+#                            ["1","0","0","1","0"]])
+
+
 class Solution(object):
     def maximalRectangle(self, matrix):
         """
@@ -21,6 +68,8 @@ class Solution(object):
         :type matrix: List[List[str]]
         :rtype: int
         """
+        if len(matrix) == 0:
+            return 0
         heights = [0 for i in matrix[0]]
         area = 0
         for i in range(len(matrix)):
@@ -72,31 +121,33 @@ class Solution(object):
         heights = [0 for i in matrix[0]]
         left = [0 for i in matrix[0]]
         right = [len(matrix[0]) for i in matrix[0]]
+        m = len(matrix)
+        n = len(matrix[0])
         max_area = 0
-        for i in range(len(matrix)):
+        for i in range(m):
             cur_left = 0
-            cur_right = 0
-            for j in range(len(matrix[i])):
+            cur_right = n
+            for j in range(n):
                 if matrix[i][j] == '1':
                     heights[j] += 1
                 else:
                     heights[j] = 0
-            for k in range(len(matrix[i])):
+            for k in range(n):
                 if matrix[i][k] == '1':
                     left[k] = max(cur_left, left[k])
                 else:
                     left[k] = 0
                     cur_left = k + 1
-            for l in range(len(matrix[i]))[::-1]:
+            for l in range(n)[::-1]:
                 if matrix[i][l] == '1':
                     right[l] = min(cur_right, right[l])
                 else:
-                    right[l] = len(matrix[i])
+                    right[l] = n
                     cur_right = l
-            print i
+            # print i
             print left
             print right
-            for h in range(len(matrix[i])):
+            for h in range(n):
                 max_area = max(max_area, (right[h] - left[h]) * heights[h])
         return max_area
 
@@ -106,9 +157,12 @@ solu = Solution()
 # 1 0 1 1 1
 # 1 1 1 1 1
 # 1 0 0 1 0
-print solu.maximalRectangle([
-    "0001000",
-    "0011100",
-    "0111110",
-])
-# print solu.maximalRectangle2(["1"])
+# print solu.maximalRectangle([
+#     "0001000",
+#     "0010100",
+#     "0101100",
+# ])
+print solu.maximalRectangle2(["10100",
+                              "10111",
+                              "11111",
+                              "10010"])
