@@ -14,6 +14,36 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def buildTree(self, inorder, postorder):
+        """
+        :type inorder: List[int]
+        :type postorder: List[int]
+        :rtype: TreeNode
+        """
+        def build_tree(postl, postr, postorder, inl, inr, inorder, post_in_map):
+            if postl > postr or inl > inr:
+                return
+            root = TreeNode(postorder[postr])
+            post_index = post_in_map[postorder[postr]]
+            # post_index - inl - 1 距离
+            root.left = build_tree(postl, postl + post_index - inl - 1, postorder, inl, post_index - 1, inorder, post_in_map)
+            root.right = build_tree(postl + post_index - inl, postr - 1, postorder, post_index + 1, inr, inorder, post_in_map)
+            return root
+
+        inorder_map = {}
+        for i in range(len(inorder)):
+            inorder_map[inorder[i]] = i
+        return build_tree(0, len(postorder) - 1, postorder, 0, len(inorder) - 1, inorder, inorder_map)
+
+
+inorder = [4, 2, 5, 1, 6, 3]
+postorder = [4, 2, 5, 6, 3, 1]
+re = ReSolution()
+print re.buildTree(inorder, postorder).val
+
+
 class Solution(object):
     def buildTree(self, inorder, postorder):
         """
