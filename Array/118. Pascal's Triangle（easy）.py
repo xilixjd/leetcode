@@ -16,6 +16,30 @@ Return
 '''
 
 
+class ReSolution(object):
+    def generate(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+        if numRows == 0:
+            return []
+        if numRows == 1:
+            return [[1]]
+        temp_array = [1, 1]
+        res = [[1], [1, 1]]
+        for i in range(numRows - 2):
+            mid_array = []
+            for j in range(len(temp_array) - 1):
+                mid_array.append(temp_array[j] + temp_array[j + 1])
+            temp_array = [1] + mid_array + [1]
+            res.append(temp_array)
+        print res
+
+re = ReSolution()
+re.generate(2)
+
+
 class Solution(object):
     def generate(self, numRows):
         """
@@ -69,4 +93,4 @@ class Solution(object):
         return res
 
 solu = Solution()
-print solu.generateMy(9)
+# print solu.generateMy(9)

@@ -18,6 +18,32 @@ where n is the total number of rows in the triangle.
 '''
 
 
+class ReSolution(object):
+    def minimumTotal(self, triangle):
+        """
+        :type triangle: List[List[int]]
+        :rtype: int
+        """
+        if len(triangle) == 0:
+            return
+        if len(triangle[0]) == 0:
+            return
+        prev_list = triangle[0]
+        for i in range(1, len(triangle)):
+            for j in range(len(triangle[i])):
+                if j == 0:
+                    triangle[i][j] = prev_list[0] + triangle[i][j]
+                elif j == len(triangle[i]) - 1:
+                    triangle[i][j] = prev_list[-1] + triangle[i][j]
+                else:
+                    triangle[i][j] = min(prev_list[j - 1], prev_list[j]) + triangle[i][j]
+            prev_list = triangle[i]
+        return min(triangle[len(triangle) - 1])
+
+re = ReSolution()
+print re.minimumTotal([[]])
+
+
 class Solution(object):
     def minimumTotal(self, triangle):
         """
@@ -79,4 +105,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.minimumTotalMy([[-1],[2,3],[1,-1,-3]])
+print solu.minimumTotal([[-1],[2,3],[1,-1,-3]])

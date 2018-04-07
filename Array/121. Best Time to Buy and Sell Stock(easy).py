@@ -19,6 +19,26 @@ In this case, no transaction is done, i.e. max profit = 0.
 '''
 
 
+class ReSolution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if len(prices) == 0:
+            return 0
+        max_profit = 0
+        min_pos_val = prices[0]
+        for i in range(len(prices)):
+            if prices[i] < min_pos_val:
+                min_pos_val = prices[i]
+            max_profit = max(prices[i] - min_pos_val, max_profit)
+        return max_profit
+
+re = ReSolution()
+print re.maxProfit([7, 1, 5, 3, 6, 4])
+
+
 class Solution(object):
     def maxProfitMy(self, prices):
         """
@@ -88,4 +108,4 @@ class Solution(object):
         return maxPro
 
 solu = Solution()
-print solu.maxProfitMyFast([7, 1, 5, 3, 6, 4])
+# print solu.maxProfitMyFast([7, 1, 5, 3, 6, 4])
