@@ -11,6 +11,47 @@ Your algorithm should run in O(n) complexity.
 '''
 
 
+class ReSolution(object):
+    def longestConsecutive(self, nums):
+        """
+        n * log(n)
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 0:
+            return 0
+        nums.sort()
+        temp = 0
+        max_len = 0
+        for i in range(1, len(nums)):
+            if nums[i] == nums[i - 1]:
+                continue
+            if nums[i] - nums[i - 1] == 1:
+                temp += 1
+            else:
+                temp = 0
+            max_len = max(max_len, temp)
+        return max_len + 1
+
+    def longestConsecutiveFast(self, nums):
+        nums_dict = {}
+        res = 0
+        for n in nums:
+            if nums_dict.get(n) is None:
+                left = nums_dict.get(n - 1, 0)
+                right = nums_dict.get(n + 1, 0)
+                sums = left + right + 1
+                nums_dict[n] = sums
+                res = max(res, sums)
+                nums_dict[n - left] = sums
+                nums_dict[n + right] = sums
+        return res
+
+
+re = ReSolution()
+print re.longestConsecutiveFast([1,2,0,1])
+
+
 class Solution(object):
     def longestConsecutive(self, nums):
         """

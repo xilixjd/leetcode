@@ -12,6 +12,18 @@ For example, in array [1, 2, 3, 1], 3 is a peak element and your function should
 '''
 
 
+class ReSolution(object):
+    def findPeakElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        for i in range(1, len(nums)):
+            if nums[i] - nums[i - 1] < 0:
+                return i - 1
+        return len(nums) - 1
+
+
 class Solution(object):
     def findPeakElementMy(self, nums):
         """

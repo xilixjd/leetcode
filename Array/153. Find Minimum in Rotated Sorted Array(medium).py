@@ -11,6 +11,30 @@ You may assume no duplicate exists in the array.
 Subscribe to see which companies asked this question.
 '''
 
+
+class ReSolution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        low = 0
+        high = len(nums) - 1
+        if nums == sorted(nums):
+            return nums[0]
+        while low < high:
+            if high - low == 1:
+                return nums[high]
+            mid = (low + high) / 2
+            if nums[mid] < nums[low]:
+                high = mid
+            if nums[mid] > nums[high]:
+                low = mid
+
+re = ReSolution()
+print re.findMin([2, 1])
+
+
 class Solution(object):
     def findMin(self, nums):
         """
@@ -51,4 +75,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.findMinMy([1,2])
+# print solu.findMinMy([1,2])
