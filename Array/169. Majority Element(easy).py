@@ -6,6 +6,16 @@ You may assume that the array is non-empty and the majority element always exist
 '''
 
 
+class ReSolution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums.sort()
+        return nums[(len(nums) - 1) / 2]
+
+
 class Solution(object):
     def majorityElement(self, nums):
         """

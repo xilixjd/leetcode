@@ -21,6 +21,32 @@ Output:
 [[1,2,6], [1,3,5], [2,3,4]]
 
 '''
+import copy
+
+
+class ReSolution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        def back_track(start, temp, res, k, target):
+            if k == 0 and target == 0:
+                res.append(copy.copy(temp))
+            if k < 0 or target < 0:
+                return
+            for i in range(start, 10):
+                temp.append(i)
+                back_track(i + 1, temp, res, k - 1, target - i)
+                temp.pop()
+
+        res = []
+        back_track(1, [], res, k, n)
+        return res
+
+re = ReSolution()
+print re.combinationSum3(3, 9)
 
 
 class Solution(object):

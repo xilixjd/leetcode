@@ -9,6 +9,30 @@ the subarray [4,3] has the minimal length under the problem constraint.
 '''
 
 
+class ReSolution(object):
+    def minSubArrayLen(self, s, nums):
+        """
+        :type s: int
+        :type nums: List[int]
+        :rtype: int
+        """
+        min_len = 1000000000
+        i = j = 0
+        sums = 0
+        while j < len(nums):
+            sums += nums[j]
+            j += 1
+            while sums >= s:
+                min_len = min(min_len, j - i)
+                sums -= nums[i]
+                i += 1
+        return min_len if min_len != 1000000000 else 0
+
+
+re = ReSolution()
+print re.minSubArrayLen(80, [1,1,1])
+
+
 class Solution(object):
     def minSubArrayLenMy(self, s, nums):
         """
@@ -35,6 +59,7 @@ class Solution(object):
             return 0
         else:
             return len(temp)
+
 
     def minSubArrayLenFast(self, s, nums):
         if len(nums) == 0:

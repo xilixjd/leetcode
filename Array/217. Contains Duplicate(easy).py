@@ -7,6 +7,21 @@ and it should return false if every element is distinct.
 '''
 
 
+class ReSolution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        nums_dict = {}
+        for i in range(len(nums)):
+            if nums_dict.get(nums[i]):
+                return True
+            else:
+                nums_dict[nums[i]] = 1
+        return False
+
+
 class Solution(object):
     def containsDuplicate(self, nums):
         """
