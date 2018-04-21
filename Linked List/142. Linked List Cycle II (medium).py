@@ -14,6 +14,7 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
 class ReSolution(object):
     def detectCycle(self, head):
         """

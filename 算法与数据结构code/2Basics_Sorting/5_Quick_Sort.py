@@ -19,7 +19,7 @@ class Sort():
         if n <= 1:
             return alist
         else:
-            pivot = alist[0]
+            pivot = alist[1]
             return self.quickSort1([x for x in alist[1:] if x < pivot]) \
         + [pivot] + self.quickSort1([x for x in alist[1:] if x >= pivot])
 
@@ -68,8 +68,9 @@ if __name__ == '__main__':
     alist1 = [1, 3, 2, 8, 3, 2, 0]
     alist2 = [1, 3, 2, 8, 3, 2, 0]
     alist3 = [1, 3, 2, 8, 3, 2, 0]
+    alist4 = [51,13,22,1,3,17,31,11,25]
     sort = Sort()
     # print('alist1\n', sort.quickSort1(alist1))
     # sort.quickSort2(alist2, 0, len(alist2) - 1)
-    sort.quickSort3(alist3, 0, len(alist3) - 1)
+    sort.quickSort2(alist4, 0, len(alist3) - 1)
     # print(alist3)

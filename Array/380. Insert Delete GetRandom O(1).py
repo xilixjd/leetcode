@@ -33,6 +33,64 @@ randomSet.getRandom();
 '''
 
 import random
+
+
+class ReRandomizedSet(object):
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.dict = {}
+        self.set_list = []
+
+    def insert(self, val):
+        """
+        Inserts a value to the set. Returns true if the set did not already contain the specified element.
+        :type val: int
+        :rtype: bool
+        """
+        if self.dict.get(val) is not None:
+            return False
+        else:
+            self.set_list.append(val)
+            self.dict[val] = len(self.set_list) - 1
+            return True
+
+    def remove(self, val):
+        """
+        Removes a value from the set. Returns true if the set contained the specified element.
+        :type val: int
+        :rtype: bool
+        """
+        index = self.dict.get(val)
+        if index is not None:
+            last_num = self.set_list[-1]
+            self.set_list[index] = last_num
+            self.dict[last_num] = index
+            self.set_list.pop()
+            del self.dict[val]
+            return True
+        else:
+            return False
+
+    def getRandom(self):
+        """
+        Get a random element from the set.
+        :rtype: int
+        """
+        return self.set_list[random.randint(0, len(self.set_list) - 1)]
+
+
+obj = ReRandomizedSet()
+print obj.insert(1)
+print obj.remove(2)
+print obj.insert(2)
+print obj.remove(1)
+print obj.set_list
+print obj.insert(2)
+print obj.set_list
+
+
 class RandomizedSet(object):
     def __init__(self):
         """
@@ -81,11 +139,11 @@ class RandomizedSet(object):
 
 
 # Your RandomizedSet object will be instantiated and called as such:
-obj = RandomizedSet()
+# obj = RandomizedSet()
 # param_1 = obj.insert(val)
-print obj.insert(1)
-print obj.remove(2)
-print obj.insert(2)
-print obj.remove(1)
-print obj.pos
-print obj.insert(2)
+# print obj.insert(1)
+# print obj.remove(2)
+# print obj.insert(2)
+# print obj.remove(1)
+# print obj.pos
+# print obj.insert(2)

@@ -11,6 +11,28 @@ Your algorithm should run in linear runtime complexity.
 Could you implement it using only constant extra space complexity?
 '''
 
+
+class ReSolution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        def sums_n(n):
+            sums = 0
+            for i in range(n + 1):
+                sums += i
+            return sums
+
+        length = len(nums)
+        # 等差数列即可 nums_sums_n = (0 + length) * (length + 1) / 2
+        nums_sums_n = sums_n(length)
+        return nums_sums_n - sum(nums)
+
+re = ReSolution()
+print re.missingNumber([0, 1, 3])
+
+
 class Solution(object):
     def missingNumberMy(self, nums):
         """

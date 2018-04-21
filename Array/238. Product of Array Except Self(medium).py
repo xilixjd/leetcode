@@ -9,6 +9,28 @@ For example, given [1,2,3,4], return [24,12,8,6].
 '''
 
 
+class ReSolution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        temp_array = []
+        temp = 1
+        for i in range(len(nums)):
+            temp_array.append(temp)
+            temp *= nums[i]
+        temp = 1
+        for i in range(len(nums))[::-1]:
+            temp_array[i] *= temp
+            temp *= nums[i]
+        return temp_array
+
+
+re = ReSolution()
+print re.productExceptSelf([1,2,3,4])
+
+
 class Solution(object):
     def productExceptSelfMy(self, nums):
         """
