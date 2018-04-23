@@ -29,6 +29,28 @@ You may assume the numbers in the Teemo's attacking time series and his poisonin
 which won't exceed 10,000,000.
 '''
 
+
+class ReSolution(object):
+    def findPoisonedDuration(self, timeSeries, duration):
+        """
+        :type timeSeries: List[int]
+        :type duration: int
+        :rtype: int
+        """
+        timeSeries.insert(0, -100000000)
+        pois_time = 0
+        for i in range(1, len(timeSeries)):
+            if timeSeries[i] - timeSeries[i - 1] >= duration:
+                pois_time += duration
+            else:
+                pois_time += timeSeries[i] - timeSeries[i - 1]
+        return pois_time
+
+
+re = ReSolution()
+print re.findPoisonedDuration([1, 1.5, 3], 3)
+
+
 class Solution(object):
     def findPoisonedDuration(self, timeSeries, duration):
         """

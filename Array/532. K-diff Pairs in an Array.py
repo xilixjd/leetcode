@@ -1,4 +1,4 @@
-import collections
+# -*- coding: utf-8 -*-
 
 '''
 Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array.
@@ -23,6 +23,68 @@ The pairs (i, j) and (j, i) count as the same pair.
 The length of the array won't exceed 10,000.
 All the integers in the given input belong to the range: [-1e7, 1e7].
 '''
+import collections
+
+
+class ReSolution(object):
+    def findPairs(self, nums, k):
+        """
+        超时
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        nums.sort()
+        count = 0
+        nums.append(1000000000)
+        if k == 0:
+            flag = True
+            for i in range(len(nums) - 1):
+                if nums[i + 1] - nums[i] == 0:
+                    if flag:
+                        count += 1
+                        flag = False
+                    else:
+                        continue
+                else:
+                    flag = True
+        else:
+            for i in range(len(nums) - 1):
+                if nums[i + 1] - nums[i] == 0:
+                    continue
+                for j in range(i + 1, len(nums) - 1):
+                    if nums[j] - nums[i] == k:
+                        count += 1
+                        break
+                    if nums[j] - nums[i] > k:
+                        break
+        return count
+
+    def findPairs2(self, nums, k):
+        d = {}
+        for i in range(len(nums)):
+            if d.get(nums[i]) is not None:
+                d[nums[i]] = 2
+            else:
+                d[nums[i]] = 1
+        count = 0
+        if k == 0:
+            for key in d:
+                if d[key] == 2:
+                    count += 1
+        elif k > 0:
+            for key in d:
+                if d.get(key + k) is not None:
+                    count += 1
+        else:
+            return 0
+        return count
+
+
+re = ReSolution()
+print re.findPairs2([1,1,1,], 0)
+
+
 class Solution(object):
     def findPairs(self, nums, k):
         """
@@ -80,6 +142,6 @@ class Solution(object):
             return 0
 
 solu = Solution()
-print solu.findPairs([1,2,2,1,1], 0)
-print solu.findPairs2([1,2,3,1,4,2], 2)
-print solu.findPairsFast([3,1,4,1,5], 2)
+# print solu.findPairs([1,2,2,1,1], 0)
+# print solu.findPairs2([1,2,3,1,4,2], 2)
+# print solu.findPairsFast([3,1,4,1,5], 2)

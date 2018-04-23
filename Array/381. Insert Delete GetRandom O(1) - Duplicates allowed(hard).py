@@ -72,6 +72,7 @@ class RandomizedCollectionBad(object):
         length = len(self.array)
         return self.array[random.randint(0, length - 1)]
 
+
 class RandomizedCollectionReWrite(object):
     def __init__(self):
         self.array = []

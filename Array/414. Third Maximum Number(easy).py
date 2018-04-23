@@ -24,6 +24,34 @@ Explanation: Note that the third maximum here means the third maximum distinct n
 Both numbers with value 2 are both considered as second maximum.
 '''
 
+
+class ReSolution(object):
+    def thirdMax(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 0:
+            return
+        first = second = third = -1
+        nums.append(-100000000000)
+        for i in range(len(nums) - 1):
+            if nums[i] > nums[first]:
+                third = second
+                second = first
+                first = i
+            elif nums[second] < nums[i] < nums[first]:
+                third = second
+                second = i
+            elif nums[third] < nums[i] < nums[second]:
+                third = i
+        return nums[third] if third != -1 else first
+
+
+re = ReSolution()
+print re.thirdMax([1,-2147483648,2, 3])
+
+
 class Solution(object):
     def thirdMax(self, nums):
         """
