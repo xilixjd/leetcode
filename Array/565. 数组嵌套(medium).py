@@ -29,25 +29,46 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # max_count = 0
+        # for i in range(len(nums)):
+        #     count = 1
+        #     max_dict = {}
+        #     max_dict[i] = 1
+        #     the_num = nums[i]
+        #     while the_num != i and max_dict.get(the_num) is None:
+        #         max_dict[the_num] = 1
+        #         count += 1
+        #         the_num = nums[the_num]
+        #     if max_count < count:
+        #         max_count = count
+        # return max_count
+
         max_count = 0
-        max_dict = {}
+        # visited = [False for i in range(len(nums))]
+        visited = {}
         for i in range(len(nums)):
             count = 1
-            index = i
-            nums_dict = {}
-            nums_dict[index] = 1
-            the_num = nums[index]
-            print 'start', nums_dict, the_num
-            while nums_dict.get(the_num) is None and max_dict.get(the_num) is None:
-                nums_dict[the_num] = 1
+            the_num = nums[i]
+            while the_num != i and visited.get(the_num) is None:
                 count += 1
-                print nums_dict
+                visited[the_num] = True
                 the_num = nums[the_num]
-            if max_count < count:
-                max_count = count
-                max_dict = nums_dict
+            max_count = max(max_count, count)
+        return max_count
+
+    def arrayNesting2(self, nums):
+        max_count = 0
+        visited = [False for i in range(len(nums))]
+        for i in range(len(nums)):
+            count = 1
+            the_num = nums[i]
+            while the_num != i and not visited[the_num]:
+                count += 1
+                visited[the_num] = True
+                the_num = nums[the_num]
+            max_count = max(max_count, count)
         return max_count
 
 
 solu = Solution()
-print solu.arrayNesting([5,4,0,3,1,6,2])
+print solu.arrayNesting2([5,4,0,3,1,6,2])
