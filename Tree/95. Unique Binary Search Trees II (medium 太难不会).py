@@ -27,7 +27,26 @@ class Solution(object):
         :rtype: List[TreeNode]
         https://yq.aliyun.com/articles/3692
         """
-        pass
+        def generate(start, end):
+            sub_tree = []
+            if start > end:
+                sub_tree.append(None)
+                return sub_tree
+            for i in range(start, end + 1):
+                left_sub_tree = generate(start, i - 1)
+                right_sub_tree = generate(i + 1, end)
+                for j in range(len(left_sub_tree)):
+                    for k in range(len(right_sub_tree)):
+                        node = TreeNode(i)
+                        node.left = left_sub_tree[j]
+                        node.right = right_sub_tree[k]
+                        sub_tree.append(node)
+            return sub_tree
+
+        if n <= 0:
+            return generate(1, 0)
+        else:
+            return generate(1, n)
 
 
 solu = Solution()

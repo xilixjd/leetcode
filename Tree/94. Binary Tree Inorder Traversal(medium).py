@@ -20,6 +20,7 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
 class Solution(object):
     def inorderTraversal(self, root):
         """
@@ -29,7 +30,6 @@ class Solution(object):
         list = []
         self.inorder(root, list)
         return list
-
 
     def inorder(self, node, list):
         if node is None:
