@@ -26,6 +26,39 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        queue = [root]
+        res = []
+        while len(queue) != 0:
+            temp_queue = []
+            for i in range(len(queue)):
+                temp_queue.append(queue[i].val)
+            res.append(temp_queue)
+            temp = []
+            for i in range(len(queue)):
+                if queue[i].left:
+                    temp.append(queue[i].left)
+                if queue[i].right:
+                    temp.append(queue[i].right)
+            queue = temp
+        return res
+
+
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(32)
+root.right.right = TreeNode(11)
+solu = ReSolution()
+print solu.levelOrder(root)
+
+
 class Solution(object):
     def levelOrder(self, root):
         """
@@ -50,10 +83,10 @@ class Solution(object):
                     queue.append(queue2[i].right)
         return array
 
-root = TreeNode(3)
-root.left = TreeNode(9)
-root.right = TreeNode(20)
-root.right.left = TreeNode(32)
-root.right.right = TreeNode(11)
-solu = Solution()
-print solu.levelOrder(root)
+# root = TreeNode(3)
+# root.left = TreeNode(9)
+# root.right = TreeNode(20)
+# root.right.left = TreeNode(32)
+# root.right.right = TreeNode(11)
+# solu = Solution()
+# print solu.levelOrder(root)

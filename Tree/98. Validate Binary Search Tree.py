@@ -28,6 +28,57 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def left_bfs(root, val):
+            if root is None:
+                return True
+            if root.val >= val:
+                return False
+            return left_bfs(root.left, val) and left_bfs(root.right, val)
+
+        def right_bfs(root, val):
+            if root is None:
+                return True
+            if root.val <= val:
+                return False
+            return right_bfs(root.left, val) and right_bfs(root.right, val)
+
+        if root is None:
+            return True
+        if not left_bfs(root.left, root.val) or not right_bfs(root.right, root.val):
+            return False
+        return self.isValidBST(root.left) and self.isValidBST(root.right)
+
+    def isValidBST2(self, root):
+        def inorder(root, array):
+            if root is None:
+                return
+            inorder(root.left, array)
+            array.append(root.val)
+            inorder(root.right, array)
+
+        array = []
+        inorder(root, array)
+        for i in range(1, len(array)):
+            if array[i] - array[i - 1] <= 0:
+                return False
+        return True
+
+solu = ReSolution()
+root = TreeNode(10)
+root.left = TreeNode(5)
+root.right = TreeNode(15)
+root.right.left = TreeNode(6)
+root.right.right = TreeNode(20)
+print solu.isValidBST(root)
+
+
 class Solution(object):
     def isValidBST(self, root):
         """
@@ -69,7 +120,6 @@ class Solution(object):
                 return False
         return True
 
-
     def inorder(self, root, list):
         if root is None:
            return
@@ -77,8 +127,10 @@ class Solution(object):
         list.append(root.val)
         self.inorder(root.right, list)
 
-solu = Solution()
-root = TreeNode(2)
-root.left = TreeNode(1)
-root.right = TreeNode(3)
-print solu.isValidBST1(root)
+# solu = Solution()
+# root = TreeNode(10)
+# root.left = TreeNode(5)
+# root.right = TreeNode(15)
+# root.right.left = TreeNode(6)
+# root.right.right = TreeNode(20)
+# print solu.isValidBST(root)

@@ -29,6 +29,35 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def sym_trees(root1, root2):
+            if root1 is None:
+                return root2 is None
+            if root2 is None:
+                return root1 is None
+            if root1.val != root2.val:
+                return False
+            return sym_trees(root1.left, root2.right) and sym_trees(root1.right, root2.left)
+
+        if root is None:
+            return True
+        return sym_trees(root.left, root.right)
+
+solu = ReSolution()
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.left.left = TreeNode(2)
+root.right = TreeNode(2)
+root.right.right = TreeNode(3)
+print solu.isSymmetric(root)
+
+
 class Solution(object):
     def isSymmetric(self, root):
         """
@@ -57,10 +86,10 @@ class Solution(object):
             deque.append(postNode.right)
         return True
 
-solu = Solution()
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.left.left = TreeNode(2)
-root.right = TreeNode(2)
-root.right.right = TreeNode(2)
-print solu.isSymmetric(root)
+# solu = Solution()
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.left.left = TreeNode(2)
+# root.right = TreeNode(2)
+# root.right.right = TreeNode(2)
+# print solu.isSymmetric(root)
