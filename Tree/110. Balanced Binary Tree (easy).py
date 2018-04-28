@@ -13,6 +13,32 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def isBalanced(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def get_depth(root):
+            left_depth = right_depth = 1
+            if root is None:
+                return 0
+            if root.left:
+                left_depth = 1 + get_depth(root.left)
+            if root.right:
+                right_depth = 1 + get_depth(root.right)
+            return left_depth if left_depth > right_depth else right_depth
+
+        if root is None:
+            return True
+        left = get_depth(root.left)
+        right = get_depth(root.right)
+        if abs(left - right) > 1:
+            return False
+        return self.isBalanced(root.left) and self.isBalanced(root.right)
+
+
 class Solution(object):
     def isBalanced(self, root):
         """
@@ -24,7 +50,6 @@ class Solution(object):
         if abs(self.height(root.left) - self.height(root.right)) > 1:
             return False
         return self.isBalanced(root.left) and self.isBalanced(root.right)
-
 
     def height(self, node):
         if node is None:

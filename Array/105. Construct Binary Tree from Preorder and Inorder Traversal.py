@@ -26,9 +26,9 @@ class ReSolution(object):
             if prel > prer or inl > inr:
                 return
             root = TreeNode(pre[prel])
-            pre_index = pre_ino_map[pre[prel]]
-            root.left = build_tree(prel + 1, prel + pre_index - inl, pre, inl, pre_index - 1, ino, pre_ino_map)
-            root.right = build_tree(prel + pre_index - inl + 1, prer, pre, pre_index + 1, inr, ino, pre_ino_map)
+            in_index = pre_ino_map[pre[prel]]
+            root.left = build_tree(prel + 1, prel + in_index - inl, pre, inl, in_index - 1, ino, pre_ino_map)
+            root.right = build_tree(prel + in_index - inl + 1, prer, pre, in_index + 1, inr, ino, pre_ino_map)
             return root
 
         ino_map = {}

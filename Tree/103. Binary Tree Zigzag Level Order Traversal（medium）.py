@@ -25,6 +25,44 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if root is None:
+            return []
+        queue = [root]
+        res = []
+        reverse = 1
+        while len(queue) != 0:
+            temp_array = [q.val for q in queue]
+            if reverse % 2 == 0:
+                temp_array.reverse()
+                res.append(temp_array)
+            else:
+                res.append(temp_array)
+            temp_queue = []
+            for q in queue:
+                if q.left:
+                    temp_queue.append(q.left)
+                if q.right:
+                    temp_queue.append(q.right)
+            queue = temp_queue
+            reverse += 1
+        return res
+
+re = ReSolution()
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(2)
+root.right.right = TreeNode(11)
+print re.zigzagLevelOrder(root)
+
+
 class Solution(object):
     def zigzagLevelOrder(self, root):
         """
@@ -53,10 +91,10 @@ class Solution(object):
                     queue.append(q.right)
         return array
 
-solu = Solution()
-root = TreeNode(3)
-root.left = TreeNode(9)
-root.right = TreeNode(20)
-root.right.left = TreeNode(2)
-root.right.right = TreeNode(11)
-print solu.zigzagLevelOrder(root)
+# solu = Solution()
+# root = TreeNode(3)
+# root.left = TreeNode(9)
+# root.right = TreeNode(20)
+# root.right.left = TreeNode(2)
+# root.right.right = TreeNode(11)
+# print solu.zigzagLevelOrder(root)

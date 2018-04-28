@@ -25,6 +25,36 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def levelOrderBottom(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        def dfs(root, height, array):
+            if root is None:
+                return
+            while len(array) <= height:
+                array.append([])
+            array[height].append(root.val)
+            dfs(root.left, height + 1, array)
+            dfs(root.right, height + 1, array)
+
+        array = []
+        dfs(root, 0, array)
+        return array[::-1]
+
+
+root = TreeNode(3)
+root.left = TreeNode(2)
+root.right = TreeNode(4)
+root.left.right = TreeNode(6)
+root.left.right.right = TreeNode(8)
+re = ReSolution()
+print re.levelOrderBottom(root)
+
+
 class Solution(object):
     def levelOrderBottom(self, root):
         """
