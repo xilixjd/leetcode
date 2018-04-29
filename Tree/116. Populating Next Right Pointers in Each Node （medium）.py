@@ -40,6 +40,29 @@ class TreeLinkNode:
         self.right = None
         self.next = None
 
+
+class ReSolution:
+    # @param root, a tree link node
+    # @return nothing
+    def connect(self, root):
+        path = [root]
+        while len(path) != 0:
+            for i in range(len(path)):
+                if path[i] is None:
+                    return
+                if i == len(path) - 1:
+                    path[i].next = None
+                else:
+                    path[i].next = path[i + 1]
+            temp_array = []
+            for p in path:
+                if p.left:
+                    temp_array.append(p.left)
+                if p.right:
+                    temp_array.append(p.right)
+            path = temp_array
+
+
 class Solution:
     # @param root, a tree link node
     # @return nothing
@@ -59,7 +82,6 @@ class Solution:
                     path.append(p.left)
                 if p.right:
                     path.append(p.right)
-
 
     def connectSameLevel(self, path):
         for i in range(len(path)):

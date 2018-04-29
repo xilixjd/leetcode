@@ -22,11 +22,47 @@ Return the sum = 12 + 13 = 25.
 
 import copy
 # Definition for a binary tree node.
+
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
+
+class ReSolution(object):
+    def sumNumbers(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def back_track(root, array, res):
+            if root is None:
+                return
+            array.append(root.val)
+            if root.left is None and root.right is None:
+                res.append(copy.copy(array))
+            back_track(root.left, array, res)
+            back_track(root.right, array, res)
+            array.pop()
+
+        res = []
+        back_track(root, [], res)
+        sums = 0
+        for r in res:
+            strs = ""
+            for s in r:
+                strs += str(s)
+            sums += int(strs)
+        return sums
+
+root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+solu = ReSolution()
+print solu.sumNumbers(None)
+
 
 class Solution(object):
     def sumNumbers(self, root):

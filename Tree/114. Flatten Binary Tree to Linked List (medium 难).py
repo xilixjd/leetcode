@@ -37,6 +37,25 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def flatten(self, root):
+        """
+        :type root: TreeNode
+        :rtype: void Do not return anything, modify root in-place instead.
+        """
+        now = root
+        while now:
+            if now.left:
+                pre = now.left
+                while pre.right:
+                    pre = pre.right
+                pre.right = now.right
+                now.right = now.left
+                now.left = None
+            now = now.right
+
+
 class Solution(object):
     def flatten(self, root):
         """

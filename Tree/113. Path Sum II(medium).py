@@ -28,6 +28,8 @@ class TreeNode(object):
         self.right = None
 
 import copy
+
+
 class Solution(object):
     def pathSum(self, root, sum):
         """
@@ -40,7 +42,6 @@ class Solution(object):
         self.findPath(root, path, sum, res)
         return res
 
-
     def findPath(self, root, path, sum, res):
         if root is None:
             return
@@ -52,7 +53,6 @@ class Solution(object):
         if root.right:
             self.findPath(root.right, path, sum, res)
         path.pop()
-
 
     def addPath(self, path):
         sum = 0

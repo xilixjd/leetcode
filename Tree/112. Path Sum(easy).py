@@ -16,12 +16,62 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 '''
 
 import copy
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
+
+class ReSolution(object):
+    def hasPathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: bool
+        """
+        def sum_array(array):
+            total = 0
+            for a in array:
+                total += a
+            return total
+
+        def back_track(root, array, total, res):
+            if root is None:
+                return
+            array.append(root.val)
+            sums = sum_array(array)
+            if sums == total and (root.left is None and root.right is None):
+                res.append(copy.copy(array))
+            back_track(root.left, array, total, res)
+            back_track(root.right, array, total, res)
+            array.pop()
+
+        res = []
+        back_track(root, [], sum, res)
+        print res
+        if len(res) > 0:
+            return True
+        else:
+            return False
+
+root = TreeNode(5)
+root.left = TreeNode(4)
+root.right = TreeNode(8)
+root.left.left = TreeNode(11)
+root.left.left.left = TreeNode(7)
+root.left.left.right = TreeNode(2)
+
+root.right.left = TreeNode(13)
+root.right.right = TreeNode(4)
+root.right.right.right = TreeNode(1)
+
+solu = ReSolution()
+print solu.hasPathSum(root, 22)
+
 
 class Solution(object):
     def hasPathSum(self, root, sum):
@@ -64,10 +114,10 @@ class Solution(object):
             return self.hasPathSum(root.left, sum - root.val) or self.hasPathSum(root.right, sum - root.val)
 
 
-root = TreeNode(3)
-root.left = TreeNode(1)
-root.right = TreeNode(4)
-root.right.right = TreeNode(2)
-
-solu = Solution()
-print solu.hasPathSum(root, 8)
+# root = TreeNode(3)
+# root.left = TreeNode(1)
+# root.right = TreeNode(4)
+# root.right.right = TreeNode(2)
+#
+# solu = Solution()
+# print solu.hasPathSum(root, 8)
