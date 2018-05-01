@@ -58,6 +58,14 @@ class ReSolution(object):
         else:
             return False
 
+    def hasPathSum2(self, root, sum):
+        if not root:
+            return False
+        if not root.left and not root.right and root.val == sum:
+            return True
+        sum -= root.val
+        return self.hasPathSum2(root.left, sum) or self.hasPathSum2(root.right, sum)
+
 root = TreeNode(5)
 root.left = TreeNode(4)
 root.right = TreeNode(8)

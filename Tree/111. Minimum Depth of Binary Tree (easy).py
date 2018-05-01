@@ -13,6 +13,27 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+class ReSolution(object):
+    def minDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        left_depth = right_depth = 1
+        if root is None:
+            return 0
+        if root.left:
+            left_depth = 1 + self.minDepth(root.left)
+        if root.right:
+            right_depth = 1 + self.minDepth(root.right)
+        if left_depth == 1:
+            return right_depth
+        if right_depth == 1:
+            return left_depth
+        return left_depth if left_depth < right_depth else right_depth
+
+
 class Solution(object):
     def minDepth(self, root):
         """
