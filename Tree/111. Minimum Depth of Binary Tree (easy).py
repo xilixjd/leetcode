@@ -7,6 +7,8 @@ The minimum depth is the number of nodes along the shortest path from the root n
 
 import copy
 # Definition for a binary tree node.
+
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
