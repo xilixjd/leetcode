@@ -153,6 +153,29 @@ class Solution(object):
                 parent.right = key_node.right
         return top.right
 
+    def deleteNode2(self, root, key):
+        '''
+        https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution
+        :return:
+        '''
+        if root is None:
+            return
+        if root.val > key:
+            root.left = self.deleteNode2(root.left, key)
+        elif root.val < key:
+            root.right = self.deleteNode2(root.right, key)
+        else:
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            min_node = root.right
+            while min_node.left:
+                min_node = min_node.left
+            root.val = min_node.val
+            root.right = self.deleteNode2(root.right, root.val)
+        return root
+
 root = TreeNode(3)
 root.left = TreeNode(1)
 root.right = TreeNode(4)
