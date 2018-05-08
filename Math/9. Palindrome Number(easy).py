@@ -15,6 +15,44 @@ There is a more generic way of solving this problem.
 '''
 
 
+def reverse2(self, x):
+    """
+    no extra space
+    :type x: int
+    :rtype: int
+    """
+
+
+class ReSolution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        def reverse_int(x):
+            def get_div10_yushu(x):
+                return x % 10
+
+            if x == 0:
+                return 0
+            positive_or_not = True
+            if x < 0:
+                positive_or_not = False
+            x = abs(x)
+            temp_res = 0
+            while x != 0:
+                yushu = get_div10_yushu(x)
+                temp_res = (temp_res * 10) + yushu
+                x = x / 10
+            if abs(temp_res) > 2 ** 31 - 1:
+                return 0
+            return temp_res if positive_or_not else -temp_res
+
+        if x < 0:
+            return False
+        return reverse_int(x) == x
+
+
 class Solution(object):
     def isPalindrome(self, x):
         """
@@ -60,3 +98,4 @@ class Solution(object):
         if abs(reversed_num) > 2 ** 31 - 1:
             return 0
         return reversed_num
+
