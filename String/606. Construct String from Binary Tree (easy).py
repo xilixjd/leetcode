@@ -55,6 +55,8 @@ class Solution(object):
             return str(t.val)
         if not t.right and t.left:
             return str(t.val) + '(' + self.tree2str(t.left) + ')'
+        if t.right and not t.left:
+            return str(t.val) + "()" + '(' + self.tree2str(t.right) + ')'
         return str(t.val) + '(' + self.tree2str(t.left) + ')' + '(' + self.tree2str(t.right) + ')'
 
     def tree2str2(self, t):
@@ -89,5 +91,6 @@ tree = TreeNode(1)
 tree.left = TreeNode(2)
 tree.right = TreeNode(3)
 tree.left.left = TreeNode(4)
+
 solu = Solution()
 print solu.tree2str2(tree)

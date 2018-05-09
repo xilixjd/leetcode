@@ -15,7 +15,7 @@ class ReSolution(object):
     def multiply(self, num1, num2):
         '''
         思路：
-        m 位数和 n 位数相乘，得到的结果必然是 m * n + 1 位数或 m * n 位
+        m 位数和 n 位数相乘，得到的结果必然是 m + n - 1 位数或 m + n 位
         :param num1: str
         :param num2: str
         :return: str
