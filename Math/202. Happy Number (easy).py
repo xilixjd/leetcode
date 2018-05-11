@@ -15,6 +15,52 @@ Example: 19 is a happy number
 '''
 
 
+class ReSolution(object):
+    def isHappy(self, n):
+        """
+        野鸡解法
+        :type n: int
+        :rtype: bool
+        """
+        n_str = str(n)
+        sums = 0
+        j = 0
+        while sums != 1:
+            temp = 0
+            for n_s in n_str:
+                temp += int(n_s) ** 2
+            sums = temp
+            n_str = str(sums)
+            print n_str
+            if j > 20:
+                return False
+            j += 1
+        return True
+
+    def isHappy2(self, n):
+        '''
+        https://leetcode.com/problems/happy-number/discuss/56917/My-solution-in-C(-O(1)-space-and-no-magic-math-property-involved-)
+        :param n:
+        :return:
+        '''
+        def get_sum(n_str):
+            sums = 0
+            for n_s in n_str:
+                sums += int(n_s) ** 2
+            return sums
+
+        slow = str(n)
+        fast = str(get_sum(str(n)))
+        while slow != fast:
+            slow = str(get_sum(slow))
+            fast = str(get_sum(fast))
+            fast = str(get_sum(fast))
+        return slow == '1'
+
+re = ReSolution()
+print re.isHappy(3)
+
+
 class Solution(object):
     def isHappy(self, n):
         """
@@ -37,4 +83,4 @@ class Solution(object):
         return True
 
 solu = Solution()
-print solu.isHappy(19)
+# print solu.isHappy(19)

@@ -11,6 +11,23 @@ Special thanks to @ts for adding this problem and creating all test cases.
 '''
 
 
+class ReSolution(object):
+    def trailingZeroes(self, n):
+        """
+        25 是 5 * 5 有两个 5
+        :type n: int
+        :rtype: int
+        """
+        count = 0
+        while n != 0:
+            count += n / 5
+            n = n / 5
+        return count
+
+re = ReSolution()
+print re.trailingZeroes(30)
+
+
 class Solution(object):
     def trailingZeroes(self, n):
         """

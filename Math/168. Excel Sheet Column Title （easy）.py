@@ -16,6 +16,28 @@ Credits:
 '''
 
 
+class ReSolution(object):
+    def convertToTitle(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        trans_dict = {}
+        j = 0
+        for i in range(65, 91):
+            trans_dict[j] = chr(i)
+            j += 1
+        print trans_dict
+        s = ""
+        while n != 0:
+            s += trans_dict[(n - 1) % 26]
+            n = n / 26
+        return s[::-1]
+
+re = ReSolution()
+print re.convertToTitle(33)
+
+
 class Solution(object):
     def convertToTitle(self, n):
         """
@@ -36,5 +58,5 @@ class Solution(object):
 
         return s[::-1]
 
-solu = Solution()
-print solu.convertToTitle(52)
+# solu = Solution()
+# print solu.convertToTitle(52)

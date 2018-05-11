@@ -20,6 +20,28 @@ Special thanks to @ts for adding this problem and creating all test cases.
 '''
 
 
+class ReSolution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        trans_dict = {}
+        j = 1
+        for i in range(ord("A"), ord("Z") + 1):
+            trans_dict[chr(i)] = j
+            j += 1
+        nums = 0
+        length = len(s)
+        for x in s:
+            nums += trans_dict[x] * 26 ** (length - 1)
+            length -= 1
+        return nums
+
+re = ReSolution()
+print re.titleToNumber("")
+
+
 class Solution(object):
     def titleToNumber(self, s):
         """
