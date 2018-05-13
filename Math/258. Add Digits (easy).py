@@ -13,9 +13,18 @@ Could you do it without any loop/recursion in O(1) runtime?
 
 Credits:
 Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.
-
-
 '''
+
+
+class ReSolution(object):
+    def addDigits(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        if num == 0:
+            return 0
+        return num % 9 if num % 9 != 0 else 9
 
 
 class Solution(object):

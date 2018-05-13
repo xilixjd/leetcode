@@ -11,6 +11,27 @@ Special thanks to @mithmatt for adding this problem and creating all test cases.
 '''
 
 
+class ReSolution(object):
+    def countPrimes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        prime_array = [0 for i in range(n)]
+        count = 0
+        for i in range(2, len(prime_array)):
+            if prime_array[i] == 0:
+                count += 1
+                j = 2
+                while i * j < n:
+                    prime_array[i * j] = 1
+                    j += 1
+        return count
+
+re = ReSolution()
+print re.countPrimes(10)
+
+
 class Solution(object):
     def countPrimes(self, n):
         """
@@ -22,7 +43,6 @@ class Solution(object):
             if self.isPrime(i):
                 count += 1
         return count
-
 
     def isPrime(self, m):
         '''
