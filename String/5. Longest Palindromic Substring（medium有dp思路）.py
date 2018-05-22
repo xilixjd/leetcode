@@ -20,6 +20,11 @@ Output: "bb"
 
 class ReSolution(object):
     def longestPalindromeMy(self, s):
+        '''
+        超时
+        :param s:
+        :return:
+        '''
         max_len = 0
         max_palindrome_str = s[0]
         for i in range(len(s)):
