@@ -20,18 +20,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # dp = [[0 for i in range(len(nums) + 1)] for j in range(len(nums) + 1)]
+        # 此方法 dp 只能用暴力法
+
+        # dp = [[0 for i in range(len(nums))] for j in range(len(nums))]
         # for i in range(len(nums)):
-        #     dp[i][0] = 0
-        #     dp[i][i + 1] = nums[i]
-        #     dp[0][i + 1] = sum(nums[:i + 1])
+        #     dp[i][i] = nums[i]
+        #     # dp[0][i] = sum(nums[:i + 1])
         #
-        # print dp
         # for i in range(len(nums)):
         #     for j in range(i + 1, len(nums)):
-        #         dp[i][j] = max(dp[i][j-1] + nums[j], dp[i][j-1])
+        #         temp = max(dp[i][j - 1] + nums[j], dp[i][j - 1])
+        #         dp[i][j] = temp
         # print dp
-        # print dp[i][j]
+        # print dp[0][j]
         max_sum = nums[0]
         temp = 0
         for i in range(len(nums)):

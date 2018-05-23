@@ -50,12 +50,9 @@ class Solution(object):
                     dp[i][j] = 0
                 else:
                     dp[i][j] = dp[i][j - 1] + dp[i - 1][j]
+        # 最好写成 dp[m][n]
         return dp[i][j]
 
 
 solu = Solution()
-print solu.uniquePathsWithObstacles([
-  [0,1,0],
-  [0,1,0],
-  [0,1,0]
-])
+print solu.uniquePathsWithObstacles([[0],[0]])

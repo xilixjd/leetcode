@@ -16,6 +16,7 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
 class ReSolution:
 # @return a ListNode
     def addTwoNumbers(self, l1, l2):
