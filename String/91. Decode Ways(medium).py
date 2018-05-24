@@ -41,10 +41,11 @@ class ReSolution(object):
                 temp = int(s[i - 2: i])
                 if 0 < temp <= 26:
                     array[i] += array[i - 2]
+        print array
         return array[len(s)]
 
 re = ReSolution()
-print re.numDecodings('01')
+print re.numDecodings('2272')
 
 
 class Solution(object):
@@ -81,4 +82,4 @@ class Solution(object):
 
 
 solu = Solution()
-print solu.numDecodings('01')
+# print solu.numDecodings('01')
