@@ -55,8 +55,8 @@ class Solution(object):
         for i in range(0, len(triangle))[::-1]:
             for j in range(i + 1):
                 sums[j] = min(sums[j], sums[j+1]) + triangle[i][j]
+                print sums
         return sums[0]
-
 
     def minimumTotal1(self, triangle):
         '''
@@ -102,7 +102,5 @@ class Solution(object):
             min_sum = min(p, min_sum)
         return min_sum
 
-
-
 solu = Solution()
-print solu.minimumTotal([[-1],[2,3],[1,-1,-3]])
+print solu.minimumTotal([[2],[8, 0],[1,9,10], [4,6,7,2]])
