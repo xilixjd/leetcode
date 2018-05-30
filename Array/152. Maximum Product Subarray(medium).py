@@ -24,7 +24,6 @@ class ReSolution(object):
             res = max(res, iMax)
         return res
 
-
     def maxProduct2(self, nums):
         """
         https://leetcode.com/problems/maximum-product-subarray/discuss/48330/Simple-Java-code
