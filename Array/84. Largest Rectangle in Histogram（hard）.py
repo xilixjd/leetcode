@@ -16,6 +16,7 @@ Given heights = [2,1,5,6,2,3],
 return 10.
 '''
 
+
 class ReSolution(object):
     def largestRectangleArea(self, heights):
         stack = []
